@@ -15,27 +15,42 @@
     </header>    
     
     <div class="text-secondary fst-italic p-2">By Zahur Meerun July 2022</div>
-    <section class="p-3 m-3 mt-0">
-        <div class="col-12 h2 text-primary text-center">Objective</div>
-        <div class="article ps-5 pe-5 w-75 mx-auto">This article objective is to simply explain the algorithm used to finding all possible routes within a network. </br></br>
+    <section class="p-3 m-3 mt-0 text-two">
+        <div class="col-12 h2 text-primary text-center">Tutorial Objective</div>
+        <div class="article ps-5 pe-5 w-75 mx-auto">This article's objective is to simply explain the algorithm used to finding all possible routes within a network. </br></br>
             There are many articles dealing with this topic however I have found that these articles tend be more for the experienced programmer
-            and can be hard to grasp for people like myself who new to programming.</br></br>
-            This article will break down the coding process into small parts which can easily be digested so we can understand the important concepts
+            and can be hard to grasp for people like myself who are relatively new to programming.</br></br>
+            This article will break down the coding process into small parts which can easily be digested so we can understand the core concepts
             involved in the coding process.
         </div>
-        <div class="col-12 h2 text-primary text-center mt-3">Why?</div>
+        <div class="col-12 h2 text-primary text-center mt-3">How Data is stored</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">
             Data needs to be stored! But how? A tree data structure! Just like a tree is made of a root connected to branches and leaves a tree data structure has nodes with a key pair values. 
-            Each node represents a location having a unique name(key) and a value. The value can be list, string or even a dictionary. Each node can be connected to a node of even a series or nodes with links just like a tree branch is 
+            Each node represents a location having a unique name (key) and a value. The value can be list, string or even a dictionary. Each node can be connected to a node of even a series or nodes with links (edges) just like a tree branch is 
             connected to leaves.</br></br>
             <div class="text-center tree"><img src="{{ MEDIA_URL }}tree-1.png" alt="data tree structure" /></div>
             </br>
-
             The root node is the main node from which all links and node will branch out from. There are many types of tree data structure, for simplicity
             the article will deal with a general tree structure which means a node can be linked to many nodes compared to for example a binary tree where nodes 
             are limited to two connections.
         </div></br>
         <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}binary-tree.png" alt="data tree structure" /></div>
+        <div class="col-12 h2 text-primary text-center mt-3">Why Tree's?</div>
+        <div class="article ps-5 pe-5 w-75 mx-auto">
+            Trees are mainly used for searching and sorting as they provide a means to store data hierarchically. In our case we are more 
+            interested in the searching aspect, more specifically the breadth first traversal method which we will come to later.</br></br>
+            Searching through a tree to find a specific node and it corresponding value in a structured form is of high importance and has several practical uses
+            in programming from file searching, finding routes in a road network and even solving a maze. The algorithm which will be used will focus on is finding all routes for a specific node which we 
+            will further refine to find shortest routes between 2 nodes. I guess at this point its isnt that hard to realise the practical use of 
+            such an algorithm! Who wouldn't want to travel from A to B in the shortest time unless its not the cheapest way!
+        </div>
+        <div class="col-12 h2 text-primary text-center mt-3">Lets Talk Recurssion</div>
+        <div class="article ps-5 pe-5 w-75 mx-auto">
+            We need to recuss! One important concept while traversing nodes is recursion. Recurssion is a programming technique using function or algorithm that calls itself one or more times until a
+            specified condition is met. Recurssion gives us the ability to search our tree until all nodes have been explored, greatly facilitating our task.</br></br>
+            
+            In simple terms we call our functions again, again and again until we not longer need it. 
+        </div>
     </section>
 {% endblock %}
 
