@@ -132,6 +132,10 @@ STATIC_URL = 'static/'
 # For main static file not tied up to app and in base_dir/Required for base.css so django will look here too
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
+# This will add the file to the media folder and not to another url
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 

@@ -33,3 +33,30 @@
     overflow: hidden;
     top: 0px;
 }
+
+.article {
+    text-align: justify;
+}
+
+.tree img, .binary-tree img {
+    max-width: 300px;
+}
+
+
+
+/* media screen repoonsive design */
+@media screen and (max-width: 768px){
+    .article {
+        width: 95% !important;
+        padding: 5px !important;
+        font-size: 15px;
+        margin: 0px !important;
+    } 
+    
+} 
+
+@media screen and (max-width: 576px){
+    .hero {
+        height: 250px;
+    } 
+} 
