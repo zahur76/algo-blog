@@ -1,0 +1,11 @@
+body, html {   
+    margin: 0;    
+    display: flex;
+    flex-direction: column; 
+    height: 100vh;      
+} 
+
+.content {    
+    background: lightblue;  
+    flex: 1;              
+}
