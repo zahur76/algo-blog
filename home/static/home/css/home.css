@@ -1,4 +1,5 @@
 .hero {
+    position: relative;
     background-image: url('/media/coding.jpg');
     background-repeat: no-repeat;
     background-position: center;
@@ -9,5 +10,21 @@
 
 .bg-header {
     position: absolute;
+    top: 0px;
+}
+
+.title {
+    position: relative;
+    top: 40%;
+    margin-left: 10%;
+}
+
+.overlay {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.419);
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     top: 0px;
 }
