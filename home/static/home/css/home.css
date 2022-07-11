@@ -13,10 +13,15 @@
     top: 0px;
 }
 
+.logo:hover {
+    color: lightgrey !important;
+}
+
 .title {
     position: relative;
     top: 40%;
     margin-left: 10%;
+    margin-right: 10%;
 }
 
 .overlay {
