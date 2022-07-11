@@ -1,0 +1,13 @@
+.hero {
+    background-image: url('/media/coding.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 500px;
+    width: 100%;
+    z-index: -1;
+}
+
+.bg-header {
+    position: absolute;
+    top: 0px;
+}

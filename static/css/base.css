@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300&family=M+PLUS+Rounded+1c:wght@300&family=Maitree&family=Manuale&family=Montserrat&display=swap');
+
 body, html {   
     margin: 0;    
     display: flex;
@@ -6,6 +8,12 @@ body, html {
 } 
 
 .content {    
-    background: lightblue;  
     flex: 1;              
+}
+
+/* --------- text --------------*/
+
+.text-one {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 500;
 }
