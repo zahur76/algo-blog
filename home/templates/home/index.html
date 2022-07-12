@@ -23,7 +23,7 @@
             This article will break down the coding process into small parts which can easily be digested so we can understand the core concepts
             involved in the coding process.
         </div>
-        <div class="col-12 h2 text-primary text-center mt-3">How Data is stored</div>
+        <div class="col-12 h2 text-primary text-center mt-5">How Data is stored</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">
             Data needs to be stored! But how? A tree data structure! Just like a tree is made of a root connected to branches and leaves a tree data structure has nodes with a key pair values. 
             Each node represents a location having a unique name (key) and a value. The value can be list, string or even a dictionary. Each node can be connected to a node of even a series or nodes with links (edges) just like a tree branch is 
@@ -35,21 +35,51 @@
             are limited to two connections.
         </div></br>
         <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}binary-tree.png" alt="data tree structure" /></div>
-        <div class="col-12 h2 text-primary text-center mt-3">Why Tree's?</div>
+        <div class="col-12 h2 text-primary text-center mt-5">Why Tree's?</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">
-            Trees are mainly used for searching and sorting as they provide a means to store data hierarchically. In our case we are more 
+            Trees are mainly used for searching and sorting as they provide a convenient means to store data hierarchically. In our case we are more 
             interested in the searching aspect, more specifically the breadth first traversal method which we will come to later.</br></br>
             Searching through a tree to find a specific node and it corresponding value in a structured form is of high importance and has several practical uses
             in programming from file searching, finding routes in a road network and even solving a maze. The algorithm which will be used will focus on is finding all routes for a specific node which we 
             will further refine to find shortest routes between 2 nodes. I guess at this point its isnt that hard to realise the practical use of 
             such an algorithm! Who wouldn't want to travel from A to B in the shortest time unless its not the cheapest way!
         </div>
-        <div class="col-12 h2 text-primary text-center mt-3">Lets Talk Recurssion</div>
+        <div class="col-12 h2 text-primary text-center mt-5">Lets Talk Recursion</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">
-            We need to recuss! One important concept while traversing nodes is recursion. Recurssion is a programming technique using function or algorithm that calls itself one or more times until a
-            specified condition is met. Recurssion gives us the ability to search our tree until all nodes have been explored, greatly facilitating our task.</br></br>
+            One important concept while traversing nodes is recursion. Recursion is a programming technique using function or algorithm that calls itself one or more times until a
+            specified condition is met. Recursion gives us the ability to search our tree using the same function until all nodes have been explored, greatly facilitating our task 
+            since we no longer need to write multiple programs to find nodes.</br></br>
             
-            In simple terms we call our functions again, again and again until we not longer need it. 
+            In simple terms we call our functions again, again and again until we not longer need it. A simple illustration of recursion would be the following code:</br></br>
+                    <div class="ps-5 code-text text-dark fw-bold">def recursive_function(num):</br>&emsp;
+                        if num == 0:<span class="text-success">&emsp;#Stopping condition</span></br>&emsp;&emsp;
+                            return print('The End!')</br>&emsp;                  
+                            print(num)</br>&emsp;
+                            recursive_function(num-1)</br>
+                    
+                        recurssive_function(5)<span class="text-success">&emsp;#Call to our function</span></br></br>
+
+                        Output:</br>
+                        5</br>4</br>3</br>2</br>1</br>"The End!"</br>
+                        
+                    </div></br>
+            The call to our function will continue as long as the stopping condition hasnt been met, in this case num==0.                    
+        </div>
+        <div class="col-12 h2 text-primary text-center mt-5">Let Define our Steps</div>
+        <div class="article ps-5 pe-5 w-75 mx-auto">
+            First we start by defining our problem from which we can define a solution.<br><br>
+            <span class="fw-bold">Problem:</span>&emsp;Obtain all routes for a node network.<br></br>
+            I always like to start small ensuring that code works with minimum data before moving on to larger data since the
+            debugging is much more manageable, hence we will start with the following graph (network) represented by a dictionary:<br></br>
+            <div class="ps-5 code-text text-dark fw-bold">
+                graph = {"A": ["B", "C"], "B": ["A", "D"], "C": ["A"]}
+            </div></br></br>
+            The following graph can be represented on diagram as follows:
+            <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}graph.png" alt="data tree structure" /></div></br>
+            Since the graph is simple we expect the output of the our program to be as follows, representing all routes:</br></br>
+            <div class="ps-5 code-text text-dark fw-bold">
+                OUTPUT: [["A", "B", "D"], ["A", "C"]]
+            </div></br></br>
         </div>
     </section>
 {% endblock %}
