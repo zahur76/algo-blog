@@ -42,21 +42,28 @@
     max-width: 300px;
 }
 
+section {
+    padding: 0px !important; 
+    margin: 0px !important;
+}
+
 
 
 /* media screen repoonsive design */
 @media screen and (max-width: 768px){
     .article {
-        width: 95% !important;
+        width: 100% !important;
         padding: 5px !important;
         font-size: 15px;
         margin: 0px !important;
-    } 
+    }
+    
     
 } 
 
 @media screen and (max-width: 576px){
     .hero {
+        margin: 0px !important;
         height: 250px;
     } 
 } 

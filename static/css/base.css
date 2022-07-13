@@ -26,3 +26,16 @@ body, html {
 .code-text {
     font-family: 'Source Code Pro', monospace;
 }
+
+/* media screen repoonsive design */
+@media screen and (max-width: 768px){
+    .code-text {
+        font-size: 12px;
+    }
+    
+} 
+@media screen and (max-width: 576px){
+    .code-text {
+        font-size: 11px;
+    } 
+} 
