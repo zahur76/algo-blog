@@ -40,15 +40,15 @@
             Trees are mainly used for searching and sorting as they provide a convenient means to store data hierarchically. In our case we are more 
             interested in the searching aspect, more specifically the breadth first traversal method which we will come to later.</br></br>
             Searching through a tree to find a specific node and it corresponding value in a structured form is of high importance and has several practical uses
-            in programming from file searching, finding routes in a road network and even solving a maze. The algorithm which will be used will focus on is finding all routes for a specific node which we 
-            will further refine to find shortest routes between 2 nodes. I guess at this point its isnt that hard to realise the practical use of 
-            such an algorithm! Who wouldn't want to travel from A to B in the shortest time unless its not the cheapest way!
+            in programming from file searching, finding routes in a road network and even solving a maze. The algorithm which will be used will focus on finding all routes for a specific node which we 
+            will further refine to obtain shortest routes between 2 nodes. I guess at this point its isnt that hard to realise the practical use of 
+            such an algorithm! Who wouldn't want to travel from A to B in the shortest time unless its not the cheapest way! (Which will get to eventually).
         </div>
         <div class="col-12 h2 text-primary text-center mt-5">Lets Talk Recursion</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">
             One important concept while traversing nodes is recursion. Recursion is a programming technique using function or algorithm that calls itself one or more times until a
-            specified condition is met. Recursion gives us the ability to search our tree using the same function until all nodes have been explored, greatly facilitating our task 
-            since we no longer need to write multiple programs to find nodes.</br></br>
+            specified condition is met. Recursion gives us the ability to search our tree using the same function until all nodes have been explored thus greatly facilitating our task 
+            since we no longer need to write multiple functions to find nodes.</br></br>
             
             In simple terms we call our functions again, again and again until we not longer need it. A simple illustration of recursion would be the following code:</br></br>
                     <div class="ps-5 code-text text-dark fw-bold">def recursive_function(num):</br>&emsp;
@@ -57,7 +57,7 @@
                             print(num)</br>&emsp;
                             recursive_function(num-1)</br>
                     
-                        recurssive_function(5)<span class="text-success">&emsp;#Call to our function</span></br></br>
+                        recursive_function(5)<span class="text-success">&emsp;#Call to our function</span></br></br>
 
                         Output:</br>
                         5</br>4</br>3</br>2</br>1</br>"The End!"</br>
@@ -68,18 +68,54 @@
         <div class="col-12 h2 text-primary text-center mt-5">Let Define our Steps</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">
             First we start by defining our problem from which we can define a solution.<br><br>
-            <span class="fw-bold">Problem:</span>&emsp;Obtain all routes for a node network.<br></br>
-            I always like to start small ensuring that code works with minimum data before moving on to larger data since the
-            debugging is much more manageable, hence we will start with the following graph (network) represented by a dictionary:<br></br>
+            <span class="fw-bold">Problem:</span>&emsp;Obtain all routes for a network.<br></br>
+            Starting with an initial simple test case ensures that code works with minimum data before moving on to larger data and making
+            debugging more manageable, hence we will start with the following graph (network) represented by a dictionary:<br></br>
             <div class="ps-5 code-text text-dark fw-bold">
                 graph = {"A": ["B", "C"], "B": ["A", "D"], "C": ["A"]}
             </div></br></br>
-            The following graph can be represented on diagram as follows:
+            The following graph can be represented on a diagram as follows:
             <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}graph.png" alt="data tree structure" /></div></br>
-            Since the graph is simple we expect the output of the our program to be as follows, representing all routes:</br></br>
+            Since the graph is simple we can expect the output of the our program to be as follows, representing all routes starting from node "A":</br></br>
             <div class="ps-5 code-text text-dark fw-bold">
-                OUTPUT: [["A", "B", "D"], ["A", "C"]]
+                OUTPUT: [["A", "C"], ["A", "B", "D"]]
             </div></br></br>
+            <span class="fw-bold">Our Solution:</span><br></br>
+            <div class="ps-2">
+            1. Starting at the initial node "A" we find all connecting nodes.</br>
+            <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}connecting1.png" alt="data tree structure" /></div></br>
+            2. Add the routes from step 1 to a stack. which will be starting node plus the connecting node.</br></br>
+            <div class="ps-5 code-text text-dark fw-bold">
+                stack = [["A", "B"], ["A", "C"]]
+            </div></br>
+            3. The items in the stack our sent back into our functions (recursion!) one by one to check if there are no connecting nodes for the last added node whilst also
+            checking if the node hasnt been visited before.</br></br>
+            <div class="ps-5 code-text text-dark fw-bold">
+                function(["A", "B"], <span class="text-danger">"B"</span>) , function(["A", "C"], <span class="text-danger">"C"</span>)
+            </div></br>
+            <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}connecting2.png" alt="data tree structure" /></div></br>
+            4. If step 3 yeilds None we can assume that we have reached the end of our route and we can add that route to a list.</br></br>
+            <div class="ps-5 code-text text-dark fw-bold">
+                function(["A", "C"], <span class="text-danger">"C"</span>) returns None
+            </div></br>
+            <div class="ps-5">We add ["A", "C"] to a list</div></br>
+            5. If step 3 yields connecting nodes we add the route back to the stack to be sent back to our function until no connecting nodes are obtained.</br></br>
+            <div class="ps-5 code-text text-dark fw-bold">
+                stack = [["A", "B" ,"D"]]</br></br>
+                function(["A", "B" ,"D"], <span class="text-danger">"D"</span>)</span>)
+            </div></br>
+            <div class="ps-5 code-text text-dark fw-bold">
+                function(["A", "B", "D"], <span class="text-danger">"D"</span>) returns None
+            </div></br>
+            <div class="ps-5 code-text text-dark fw-bold">
+                stack = []</br>
+            </div></br>
+            <div class="ps-5">We add ["A", "B", "D"] to a list</div></br>
+            6. Once no connecting nodes are obtained from the stack, the stack remains empty, we return the list of all routes.</br></br>
+            <div class="ps-5 code-text text-dark fw-bold">
+                all_routes = [["A", "C"], ["A", "B", "D"]]
+            </div></br>
+            This method of searching for connecting nodes level by level and is referred to as <span class="fw-bold">breadth first traversal method</span>. 
         </div>
     </section>
 {% endblock %}
