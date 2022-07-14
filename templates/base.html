@@ -34,8 +34,22 @@
             {% block content %}                
             {% endblock %}
         </div>
-        <div class="form comment-form w-50 mx-auto mb-5 border border-primary p-3 rounded-2">
-            <div class="col-12 h2 text-primary text-center fw-light">Send a Comment</div>
+        <!-- Message template -->  
+        {% if messages %}
+            <ul class="flash-message">
+                {% for message in messages %}
+                    {% with message.level as level %}
+                        {% if level == 40 %}   
+                            <div class="box text-center h6 p-3 m-0">{{ message }}</div>
+                        {% else%}
+                            <div class="box text-center h6 p-3 m-0">{{ message }}</div>
+                        {% endif %}
+                    {% endwith %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="form comment-form w-50 mx-auto mb-5 border border-primary p-3 rounded-2 bg-primary">
+            <div class="col-12 h2 text-light text-center fw-light">Feedback</div>
             <form action="{% url 'send_comment' %}" method="POST">
                 {% csrf_token %}
                 <div class="input-group mb-3">
@@ -47,10 +61,10 @@
                     <input type="email" class="form-control" name="email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" required>
                 </div>
                 <div class="input-group">
-                    <textarea class="form-control" name="comment" aria-label="With textarea" required></textarea>
+                    <textarea class="form-control" name="comment"placeholder="Send Feedback" aria-label="With textarea" required></textarea>
                 </div>
                 <div class="text-center"> 
-                    <button type="submit" class="btn-outline-primary rounded-1 mt-3">Send<i class="far fa-paper-plane"></i></button>
+                    <button type="submit" class="btn-outline-primary border-0 rounded-1 mt-3">Send<i class="far fa-paper-plane"></i></button>
                 </div>                
             </form>
         </div>        

@@ -17,7 +17,7 @@
     <div class="text-secondary fst-italic p-2">By Zahur Meerun July 2022</div>
     <section class="p-1 mt-0 text-two">
         <div class="col-12 h2 text-primary text-center">Tutorial Objective</div>
-        <div class="article ps-5 pe-5 w-75 mx-auto">This article's objective is to simply explain the algorithm used in finding all possible routes within a network. </br></br>
+        <div class="article ps-5 pe-5 w-75 mx-auto">This article's objective is to simply explain the algorithm used in finding all possible routes within a network of connected nodes </br></br>
             There are many articles dealing which tend be more for the experienced programmer
             and can be hard to grasp for people who are relatively new to programming.</br></br>
             This article will break down the coding process into small parts which can easily be digested so we can understand the core concepts
@@ -67,7 +67,7 @@
                 </div></br>
             The call to our function will continue as long as the stopping condition hasnt been met, in this case num==0.                    
         </div>
-        <div class="col-12 h2 text-primary text-center mt-5">Defining our Solution</div>
+        <div class="col-12 h2 text-primary text-center mt-5">Defining our Problem and Solution</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">
             First we start by defining our problem from which a solution can be found.<br><br>
             <span class="fw-bold">Problem:</span>&emsp;Obtain all routes for a network.<br></br>
@@ -152,7 +152,7 @@
                 &emsp;&emsp;return print(f'final result: {paths}')</br>
             </div>
             </div></br>
-            2. The recursive function which will be the heart of our algorithm to search through our tree.</br>
+            2. The recursive function will be the heart of our algorithm to search through our tree.</br>
             <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-light bg-dark p-2 fw-bold mt-3">
                 def find_path(graph, vertex, visited):</br>
@@ -203,7 +203,7 @@
             </div>
             </div></br></br>
             <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}complex.png" alt="data tree structure" /></div></br>
-            This graph has the added complexity of being cyclic which will further test our code.
+            This graph has the added complexity of being cyclic which will further test our code's integrity.
             <div class="d-flex justify-content-center">
                 <div class="ps-2 code-text text-light bg-dark fw-bold mt-3 pt-2 pb-2 pe-2">
                     &emsp;&emsp;find_routes(graph, "A")</br></br>
@@ -218,7 +218,7 @@
             At this stage we have returned all possible routes from a node. Although alot of ground have been covered, our function does not 
             return something meaningful. Maybe if we could return the shortest distance between two nodes, now that would be helpful. In doing so, the
             assumption made is that the shorest distance is always the least amount of nodes we traverse while travelling from start node to end node. This assumption, as we will find
-            out later, may not always be true. To extend our functionality I have updated our <span class="code-text">find_routes</span> function.</br>
+            out in part 2 of my tutorial, may not always be true. To extend our functionality I have updated our <span class="code-text">find_routes</span> function.</br>
             <div class="d-flex justify-content-center">
                 <div class="ps-2 code-text text-light bg-dark p-2 fw-bold mt-3">
                 def find_routes(graph, vertex, end_node, visited=[]):</br>
@@ -250,7 +250,7 @@
             Great! We started with a network of nodes represented by a graph and returned all 5 possible routes without revisiting a node. From there we further extended our
             functionality by returning the minimum path between 2 node.
             My next tutorial will expand on this topic and apply 
-            what we have learnt to a real life problem, Part 2. This brings us to the end of the tutorial, hope you have enjoyed it. Please send any comments and suggestions
+            what we have learnt to a real life problem, Part 2. This brings us to the end of the tutorial, hope you have enjoyed it. Please send any feedback
             by filling out the form below.</br>
         </div>     
     </section>

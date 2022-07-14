@@ -1,5 +1,6 @@
 from django.shortcuts import render, reverse, redirect
 from django.core.mail import send_mail
+from django.contrib import messages
 
 
 # Create your views here
@@ -29,5 +30,5 @@ def send_comment(request):
             email,
             ["zahurmeerun@hotmail.com"]
         )
-
+    messages.success(request, "Thanks for your Feedback!")
     return redirect(reverse("home"))
