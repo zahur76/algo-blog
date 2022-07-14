@@ -17,11 +17,11 @@
     <div class="text-secondary fst-italic p-2">By Zahur Meerun July 2022</div>
     <section class="p-1 mt-0 text-two">
         <div class="col-12 h2 text-primary text-center">Tutorial Objective</div>
-        <div class="article ps-5 pe-5 w-75 mx-auto">This article's objective is to simply explain the algorithm used to finding all possible routes within a network. </br></br>
-            There are many articles dealing with this topic however I have found that these articles tend be more for the experienced programmer
-            and can be hard to grasp for people like myself who are relatively new to programming.</br></br>
+        <div class="article ps-5 pe-5 w-75 mx-auto">This article's objective is to simply explain the algorithm used in finding all possible routes within a network. </br></br>
+            There are many articles dealing which tend be more for the experienced programmer
+            and can be hard to grasp for people who are relatively new to programming.</br></br>
             This article will break down the coding process into small parts which can easily be digested so we can understand the core concepts
-            involved in the coding process.
+            involved.
         </div>
         <div class="col-12 h2 text-primary text-center mt-5">How Data is stored</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">
@@ -41,7 +41,7 @@
             interested in the searching aspect, more specifically the breadth first traversal method which we will come to later.</br></br>
             Searching through a tree to find a specific node and it corresponding value in a structured form is of high importance and has several practical uses
             in programming from file searching, finding routes in a road network and even solving a maze. The algorithm which will be used will focus on finding all routes for a specific node which we 
-            will further refine to obtain shortest routes between 2 nodes. I guess at this point its isnt that hard to realise the practical use of 
+            will further refine to obtain shortest routes between 2 nodes. I guess at this point its isnt that hard to realise one practical use of 
             such an algorithm! Who wouldn't want to travel from A to B in the shortest time unless its not the cheapest way! (Which will get to eventually).
         </div>
         <div class="col-12 h2 text-primary text-center mt-5">Lets Talk Recursion</div>
@@ -50,7 +50,7 @@
             specified condition is met. Recursion gives us the ability to search our tree using the same function until all nodes have been explored thus greatly facilitating our task 
             since we no longer need to write multiple functions to find nodes.</br></br>
             
-            In simple terms we call our functions again, again and again until we not longer need it. A simple illustration of recursion would be the following code:</br></br>
+            In simple terms we call our functions again, again and again until we not longer need it. A basic illustration of recursion would be the following code:</br></br>
                     <div class="d-flex justify-content-center">
                     <div class="ps-2 p-1 code-text bg-dark text-light fw-bold">def recursive_function(num):</br>&emsp;
                         if num == 0:<span class="text-success">&emsp;#Stopping condition</span></br>&emsp;&emsp;
@@ -67,71 +67,94 @@
                 </div></br>
             The call to our function will continue as long as the stopping condition hasnt been met, in this case num==0.                    
         </div>
-        <div class="col-12 h2 text-primary text-center mt-5">Let Define our Steps</div>
+        <div class="col-12 h2 text-primary text-center mt-5">Defining our Solution</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">
-            First we start by defining our problem from which we can define a solution.<br><br>
+            First we start by defining our problem from which a solution can be found.<br><br>
             <span class="fw-bold">Problem:</span>&emsp;Obtain all routes for a network.<br></br>
             Starting with an initial simple test case ensures that code works with minimum data before moving on to larger data and making
             debugging more manageable, hence we will start with the following graph (network) represented by a dictionary:<br></br>
+            <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
                 graph = {"A": ["B", "C"], "B": ["A", "D"], "C": ["A"]}
+            </div>
             </div></br></br>
             The following graph can be represented on a diagram as follows:
             <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}graph.png" alt="data tree structure" /></div></br>
-            Since the graph is simple we can expect the output of the our program to be as follows, representing all routes starting from node "A":</br></br>
+            Since the graph is straightforward we can expect the output of the our program to be as follows, representing all routes starting from node "A":</br></br>
+            <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
                 OUTPUT: [["A", "B", "D"], ["A", "C"]]
+            </div>
             </div></br></br>
             <span class="fw-bold">Our Solution:</span><br></br>
             <div class="ps-2">
             1. Starting at the initial node "A" we find all connecting nodes.</br>
             <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}connecting1.png" alt="data tree structure" /></div></br>
-            2. Add the routes from step 1 to a stack. which will be the starting node plus the connecting node.</br></br>
+
+            2. Add the accumulated routes from step 1 to a stack. which will be the starting node plus the connecting node.</br></br>
+            <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
                 stack = [["A", "B"], ["A", "C"]]
+            </div>
             </div></br>
+
             3. The items in the stack our sent back into our functions (recursion!) one by one to check if there are no connecting nodes for the last added node whilst also
             checking if the node hasnt been visited before.</br></br>
+            <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
                 function(["A", "B"], <span class="text-danger">"B"</span>) , function(["A", "C"], <span class="text-danger">"C"</span>)
+            </div>
             </div></br>
             <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}connecting2.png" alt="data tree structure" /></div></br>
             4. If step 3 returns no connecting nodes, therefore implying the stack is empty, we can assume that we have reached the end of our route and we can add that route to a list.</br></br>
+            <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
                 function(["A", "C"], <span class="text-danger">"C"</span>) stack empty
+            </div>
             </div></br>
-            <div class="ps-5">We add ["A", "C"] to a list</div></br>
-            5. If step 3 yields connecting nodes we add the route back to the stack to be sent back to our function until no connecting nodes are obtained.</br></br>
+            <div class="ps-5 text-center">We add ["A", "C"] to a list</div></br>
+            5. If step 3 yields connecting nodes we add the route plus node back to the stack to be sent back to our function until no connecting nodes are obtained.</br></br>
+            <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
                 stack = [["A", "B" ,"D"]]</br></br>
                 function(["A", "B" ,"D"], <span class="text-danger">"D"</span>)</span>)
+            </div>
             </div></br>
+            <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
                 function(["A", "B", "D"], <span class="text-danger">"D"</span>) stack empty
+            </div>
             </div></br>
+            <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
                 stack = []</br>
+            </div>
             </div></br>
-            <div class="ps-5">We add ["A", "B", "D"] to a list</div></br>
+            <div class="ps-5 text-center">We add ["A", "B", "D"] to a list</div></br>
             6. Once no connecting nodes are obtained from the stack, the stack remains empty, we return the list of all routes.</br></br>
+            <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
                 all_routes = [["A", "B", "D"], ["A", "C"]]
+            </div>
             </div></br>
             This method of searching for connecting nodes level by level and is referred to as <span class="fw-bold">breadth first traversal method</span>. 
         </div>        
         </div></br></br>
         <div class="col-12 h2 text-primary text-center">Let's Start Coding!</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">Our code will be written in Python and will consist of 2 functions:</br></br>
-            1. The Start function which will take the initial inputs and send it to our recursive function and will also return our final result. We also require a globally defined variable to store all routes when stacks return empty list as described above.</br>
-            <div class="ps-2 code-text text-dark fw-bold mt-3">
+            1. The Start function which will take the initial inputs and send it to our recursive function and will also return our final result. We also require a globally defined variable to store all routes when the stacks return an empty list as described above.</br>
+            <div class="d-flex justify-content-center">
+            <div class="ps-2 code-text text-light bg-dark p-2 fw-bold mt-3">
                 all_routes = []</br></br>
                 def find_routes(graph, vertex, visited=[]):</br>
                 &emsp;&emsp;visited.append(vertex)</br>
-                &emsp;&emsp;paths = find_connections(graph, vertex, visite>d)</br>
+                &emsp;&emsp;paths = find_connections(graph, vertex, visited)</br>
                 &emsp;&emsp;return print(f'final result: {paths}')</br>
+            </div>
             </div></br>
             2. The recursive function which will be the heart of our algorithm to search through our tree.</br>
-            <div class="ps-2 code-text text-dark fw-bold mt-3">
+            <div class="d-flex justify-content-center">
+            <div class="ps-2 code-text text-light bg-dark p-2 fw-bold mt-3">
                 def find_path(graph, vertex, visited):</br>
                 &emsp;&emsp;stack = []</br></br>
                 &emsp;&emsp;<span class="text-primary">print(f'Check connections: {visited , vertex}')</span></br></br>
@@ -147,10 +170,12 @@
                 &emsp;&emsp;&emsp;&emsp;<span class="text-primary">print(f'Add to all routes: {visited}')</span></br></br>
                 &emsp;&emsp;&emsp;&emsp;all_routes.append(visited)</br>
                 &emsp;&emsp;return all_routes
+            </div>
             </div></br>
-            Print statements have been included to help us follow our code,  let's run out code using our previously defined graph:</br>
-            <div class="ps-2 code-text text-dark fw-bold mt-3">
-                &emsp;&emsp;Run: print(f'All Paths: {find_routes(graph, "A")}')</br></br>
+            Print statements have been included to help us follow our code. Let's run our code using our previously defined graph:</br>
+            <div class="d-flex justify-content-center">
+            <div class="ps-2 code-text text-light bg-dark fw-bold mt-3 pt-2 pb-2">
+                &emsp;&emsp;print(f'All Paths: {find_routes(graph, "A")}')</br></br>
                 &emsp;&emsp;OUTPUT:</br>
                 &emsp;&emsp;&emsp;Check connections: (['A'], 'A')</br>
                 &emsp;&emsp;&emsp;stack: [['A', 'B'], ['A', 'C']]</br>
@@ -162,19 +187,36 @@
                 &emsp;&emsp;&emsp;Check connections: (['A', 'C'], 'C')</br>
                 &emsp;&emsp;&emsp;No Connections!, stack:[]</br>
                 &emsp;&emsp;&emsp;Add to all routes: ['A', 'C']</br>
-                &emsp;&emsp;&emsp;All Paths: <span class="bg-dark text-light">[['A', 'B', 'D'], ['A', 'C']]</span></br>
+                &emsp;&emsp;&emsp;All Paths: [['A', 'B', 'D'], ['A', 'C']]</br>
+            </div>
             </div></br>
-            Output as predicted!
+            <div class="text-center mb-3">Output as predicted!</div>
+           
         </div>
         <div class="col-12 h2 text-primary text-center mt-2">More Test Cases!</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">
             Now we know our code is working as expected its time to increase the pressure and run a slightly more complex test case!
             The graph we will use is as follows:
+            <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold mt-2">
-                graph = {</br>&emsp; "A": ["B", "C", "H"],</br>&emsp; "B": ["C"],</br>&emsp; "C": ["B"],</br>&emsp; "D": ["A", "G", "F"],</br>&emsp; "G": ["D", "E", "F"],</br>&emsp; "E": ["G"]</br>}
+                graph = {</br>&emsp; "A": ["B", "D", "H"],</br>&emsp; "B": ["A", "C"],</br>&emsp; "C": ["B"],</br>&emsp; "D": ["A", "G", "F"],</br>&emsp; "G": ["D", "E", "F"],</br>&emsp; "E": ["G"]</br>,&emsp;"F": ["D", "G"]</br>}
+            </div>
             </div></br></br>
-        </div></br>
+            <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}complex.png" alt="data tree structure" /></div></br>
+            This graph has the added complexity of being cyclic which will further test our code.
+            <div class="d-flex justify-content-center">
+                <div class="ps-2 code-text text-light bg-dark fw-bold mt-3 pt-2 pb-2 pe-2">
+                    &emsp;&emsp;find_routes(graph, "A")</br></br>
+                    &emsp;&emsp;OUTPUT:</br>
+                    &emsp;&emsp;&emsp;[['A', 'B', 'C'], ['A', 'D', 'F', 'G', 'E'],</br>&emsp;&emsp;&emsp;['A', 'D', 'G', 'F'],['A', 'D', 'G', 'E'], ['A', 'H']]</br>
+                </div>
+            </div></br>
+            <div class="col-12 h2 text-primary text-center mt-5">Conclusion</div>
+            Great! We have returned all 5 possible routes without revisiting a node. I intend to expand on this topic and apply 
+            what we have learnt to a real life problem, Part 2. This brings us to the end of the tutorial, hope you have enjoyed it. Please send any comments and suggestions
+            by filling out the form below.</br>
 
+        </div></br>      
     </section>
 {% endblock %}
 

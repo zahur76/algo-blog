@@ -52,18 +52,25 @@ section {
 /* media screen repoonsive design */
 @media screen and (max-width: 768px){
     .article {
-        width: 100% !important;
+        width: 90% !important;
         padding: 5px !important;
         font-size: 15px;
-        margin: 0px !important;
     }
     
     
 } 
 
 @media screen and (max-width: 576px){
+    .article {
+        width: 100% !important;
+    }
+
     .hero {
         margin: 0px !important;
         height: 250px;
-    } 
+    }
+
+    .tree img, .binary-tree img {
+        max-width: 250px;
+    }
 } 
