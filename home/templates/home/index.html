@@ -211,12 +211,48 @@
                     &emsp;&emsp;&emsp;[['A', 'B', 'C'], ['A', 'D', 'F', 'G', 'E'],</br>&emsp;&emsp;&emsp;['A', 'D', 'G', 'F'],['A', 'D', 'G', 'E'], ['A', 'H']]</br>
                 </div>
             </div></br>
-            <div class="col-12 h2 text-primary text-center mt-5">Conclusion</div>
-            Great! We have returned all 5 possible routes without revisiting a node. I intend to expand on this topic and apply 
+            The solution is what we expected, 5 possible routes without revisiting a node.
+        </div></br>
+        <div class="article ps-5 pe-5 w-75 mx-auto mt-3 mb-5">
+            <div class="col-12 h2 text-primary text-center">Going even further</div>
+            At this stage we have returned all possible routes from a node. Although alot of ground have been covered, our function does not 
+            return something meaningful. Maybe if we could return the shortest distance between two nodes, now that would be helpful. In doing so, the
+            assumption made is that the shorest distance is always the least amount of nodes we traverse while travelling from start node to end node. This assumption, as we will find
+            out later, may not always be true. To extend our functionality I have updated our <span class="code-text">find_routes</span> function.</br>
+            <div class="d-flex justify-content-center">
+                <div class="ps-2 code-text text-light bg-dark p-2 fw-bold mt-3">
+                def find_routes(graph, vertex, end_node, visited=[]):</br>
+                &emsp;&emsp;visited.append(vertex)</br>
+                &emsp;&emsp;paths = find_connections(graph, vertex, visited)</br>
+                &emsp;&emsp;all_paths = []</br>
+                &emsp;&emsp;for route in all_paths:</br>
+                &emsp;&emsp;&emsp;&emsp;if end_node in route:</br>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;my_paths.append(route[:route.index(end_node)+1])</br>
+                &emsp;&emsp;path_length = []</br>
+                &emsp;&emsp;for path in my_paths:</br>
+                &emsp;&emsp;&emsp;&emsp;path_length.append(len(path))</br>
+                &emsp;&emsp;index_of_minimum = path_length.index(min(path_length))</br>
+                &emsp;&emsp;return my_paths[index_of_minimum]</br>
+            </div>
+            </div></br>
+            The code will now run through all paths obtained from our recursive function and determine which paths have a start node equal to <span class="code-text">vertex </span> and includes a node equal to 
+            <span class="code-text">end_node</span>, we then add that path to a list.
+            We then find the index from the list in which the amount of nodes are a minimum and return that route up to including the end node.</br></br>
+            If we run our updated code the output is:</br>
+            <div class="d-flex justify-content-center">
+            <div class="ps-2 pe-2 code-text text-light bg-dark fw-bold mt-3 pt-2 pb-2">
+                ['A', 'D', 'F']</br>
+            </div>
+        </div>
+        </div>
+        <div class="article ps-5 pe-5 w-75 mx-auto mt-3 mb-5">
+            <div class="col-12 h2 text-primary text-center">Conclusion</div>
+            Great! We started with a network of nodes represented by a graph and returned all 5 possible routes without revisiting a node. From there we further extended our
+            functionality by returning the minimum path between 2 node.
+            My next tutorial will expand on this topic and apply 
             what we have learnt to a real life problem, Part 2. This brings us to the end of the tutorial, hope you have enjoyed it. Please send any comments and suggestions
             by filling out the form below.</br>
-
-        </div></br>      
+        </div>     
     </section>
 {% endblock %}
 

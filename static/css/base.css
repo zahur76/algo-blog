@@ -28,14 +28,34 @@ body, html {
 }
 
 /* media screen repoonsive design */
-@media screen and (max-width: 768px){
+
+@media screen and (max-width: 992px){
     .code-text {
         font-size: 12px;
     }
-    
+    .comment-form {
+        width: 60% !important;
+    }    
+}
+
+@media screen and (max-width: 768px){
+    .comment-form {
+        width: 75% !important;
+    }    
 } 
+
 @media screen and (max-width: 576px){
     .code-text {
         font-size: 10px;
+    }
+
+    .comment-form {
+        width: 95% !important;
     } 
+} 
+
+@media screen and (max-width: 450px){
+    .code-text {
+        font-size: 9px;
+    }
 } 

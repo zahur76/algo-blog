@@ -34,13 +34,13 @@
             {% block content %}                
             {% endblock %}
         </div>
-        <div class="form w-50 mx-auto mb-5 border border-primary p-3 rounded-2">
+        <div class="form comment-form w-50 mx-auto mb-5 border border-primary p-3 rounded-2">
             <div class="col-12 h2 text-primary text-center fw-light">Send a Comment</div>
             <form action="{% url 'send_comment' %}" method="POST">
                 {% csrf_token %}
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1"><i class="far fa-user"></i></span>
-                    <input type="text" class="form-control" name="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>
+                    <input type="text" class="form-control" name="username" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" required>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">@</span>
