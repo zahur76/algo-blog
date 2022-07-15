@@ -21,7 +21,7 @@ def send_comment(request):
         print(email)
         print(comment)
 
-        subject = "Comment for SimpleAlgo"
+        subject = "Comment Received from SimpleAlgo"
         body = comment
 
         send_mail(
