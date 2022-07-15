@@ -16,10 +16,6 @@ def send_comment(request):
         username = request.POST['username']
         email = request.POST['email']
         comment = request.POST['comment']
-        print(username)
-
-        print(email)
-        print(comment)
 
         subject = "Comment Received from SimpleAlgo"
         body = comment
