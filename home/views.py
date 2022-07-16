@@ -4,6 +4,8 @@ from django.contrib import messages
 
 from .models import SiteHits
 
+from algo_blog.settings import DEFAULT_FROM_EMAIL
+
 
 # Create your views here
 def index(request):
@@ -31,7 +33,7 @@ def send_comment(request):
         send_mail(
             subject,
             body,
-            email,
+            DEFAULT_FROM_EMAIL,
             ["zahurmeerun@hotmail.com"]
         )
     messages.success(request, "Thanks for your Feedback!")
