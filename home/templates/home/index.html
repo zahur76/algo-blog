@@ -113,7 +113,7 @@
             </div>
             </div></br>
             <div class="ps-5 text-center">We add ["A", "C"] to a list</div></br>
-            5. If step 3 yields connecting nodes we add the route plus node back to the stack to be sent back to our function until no connecting nodes are obtained.</br></br>
+            5. If step 3 yields connecting nodes we add the route plus node back to the stack and send it back to our function. This process is continued until no connecting nodes are returned.</br></br>
             <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
                 stack = [["A", "B" ,"D"]]</br></br>
@@ -238,10 +238,11 @@
             The code will now run through all paths obtained from our recursive function and determine which paths have a start node equal to <span class="code-text">vertex </span> and includes a node equal to 
             <span class="code-text">end_node</span>, we then add that path to a list.
             We then find the index from the list in which the amount of nodes are a minimum and return that route up to including the end node.</br></br>
-            If we run our updated code the output is:</br>
+            Let's run our code with starting node "A" and end node "F.</br>
             <div class="d-flex justify-content-center">
             <div class="ps-2 pe-2 code-text text-light bg-dark fw-bold mt-3 pt-2 pb-2">
-                ['A', 'D', 'F']</br>
+                find_routes(graph, "A", "F")</br></br>
+                OUTPUT: ['A', 'D', 'F']</br>
             </div>
         </div>
         </div>
