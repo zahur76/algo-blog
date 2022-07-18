@@ -91,58 +91,60 @@
             1. Starting at the initial node "A" we find all connecting nodes.</br>
             <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}connecting1.png" alt="data tree structure" /></div></br>
 
-            2. Add the accumulated routes from step 1 to a stack. which will be the starting node plus the connecting node.</br></br>
+            2. Add the accumulated routes from step 1 to a queue, which will consist of the starting node plus the connecting node.</br></br>
             <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
-                stack = [["A", "B"], ["A", "C"]]
+                queue = [["A", "B"], ["A", "C"]]
             </div>
             </div></br>
 
-            3. The items in the stack our sent back into our functions (recursion!) one by one to check if there are no connecting nodes for the last added node whilst also
-            checking if the node hasnt been visited before.</br></br>
+            3. The items in the queue our sent back into our functions (recursion!) one by one to check if there are no connecting nodes for the last added node whilst also
+            checking if the node hasn't been visited before.</br></br>
             <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
                 function(["A", "B"], <span class="text-danger">"B"</span>) , function(["A", "C"], <span class="text-danger">"C"</span>)
             </div>
             </div></br>
             <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}connecting2.png" alt="data tree structure" /></div></br>
-            4. If step 3 returns no connecting nodes, therefore implying the stack is empty, we can assume that we have reached the end of our route and we can add that route to a list.</br></br>
+            4. If step 3 returns no connecting nodes, therefore implying the queue is empty, we can assume that we have reached the end of our route and we can add that route to a list.</br></br>
             <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
-                function(["A", "C"], <span class="text-danger">"C"</span>) stack empty
+                function(["A", "C"], <span class="text-danger">"C"</span>) queue empty
             </div>
             </div></br>
             <div class="ps-5 text-center">We add ["A", "C"] to a list</div></br>
-            5. If step 3 yields connecting node/nodes we add the route plus node back to the stack and send it back to our function. This process is continued until no connecting nodes are returned.</br></br>
+            5. If step 3 yields connecting node/nodes we add the route plus node back to the queue and send it back to our function. This process is continued until no connecting nodes are returned.</br></br>
             <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
-                stack = [["A", "B" ,"D"]]</br></br>
+                queue = [["A", "B" ,"D"]]</br></br>
                 function(["A", "B" ,"D"], <span class="text-danger">"D"</span>)</span>)
             </div>
             </div></br>
             <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
-                function(["A", "B", "D"], <span class="text-danger">"D"</span>) stack empty
+                function(["A", "B", "D"], <span class="text-danger">"D"</span>) queue empty
             </div>
             </div></br>
             <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
-                stack = []</br>
+                queue = []</br>
             </div>
             </div></br>
             <div class="ps-5 text-center">We add ["A", "B", "D"] to a list</div></br>
-            6. Once no connecting nodes are obtained from the stack, the stack remains empty, we return the list of all routes.</br></br>
+            6. Once no connecting nodes are obtained, the queue remains empty signalling the end of the process, we return the list of all routes.</br></br>
             <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-dark fw-bold">
                 all_routes = [["A", "B", "D"], ["A", "C"]]
             </div>
             </div></br>
-            The algorithm used for searching for connecting nodes level by level and is referred to as <span class="fw-bold">breadth-first traversal method</span>. 
+            The algorithm used for searching for connecting nodes level by level and is referred to as <span class="fw-bold">breadth-first traversal method</span>. The following represents
+            a flow chart of the algorithm.</br>
+            <div class="text-center binary-tree"><img src="{{ MEDIA_URL }}function.png" alt="data tree structure" /></div></br>
         </div>        
-        </div></br></br>
+        </div></br>
         <div class="col-12 h2 text-primary text-center">Let's Start Coding!</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">Our code will consist of 2 functions:</br></br>
-            1. The Start function will take the initial inputs and send them to our recursive function and will also return our final result. We also require a globally defined variable to store all routes when the stacks return an empty list as described above.</br>
+            1. The Start function will take the initial inputs and send them to our recursive function and will also return our final result. We also require a globally defined variable to store all routes when the queue return an empty list as described above.</br>
             <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-light bg-dark p-2 fw-bold mt-3 border border-5 border-primary">
                 all_routes = []</br></br>
@@ -156,17 +158,17 @@
             <div class="d-flex justify-content-center">
             <div class="ps-2 code-text text-light bg-dark p-2 fw-bold mt-3 border border-5 border-primary">
                 def find_path(graph, vertex, visited):</br>
-                &emsp;&emsp;stack = []</br></br>
+                &emsp;&emsp;queue= []</br></br>
                 &emsp;&emsp;<span class="text-primary">print(f'Check connections: {visited , vertex}')</span></br></br>
                 &emsp;&emsp;for node in graph[vertex]:</br>
                 &emsp;&emsp;&emsp;&emsp;if node not in visited:</br>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;stack.append(visited + [node])</br>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;queue.append(visited + [node])</br>
                 &emsp;&emsp;if stack:</br></br>
-                &emsp;&emsp;&emsp;&emsp;<span class="text-primary">print(f'stack: {stack}')</span></br></br>
-                &emsp;&emsp;&emsp;&emsp;for route in stack:</br>
+                &emsp;&emsp;&emsp;&emsp;<span class="text-primary">print(f'queue: {queue}')</span></br></br>
+                &emsp;&emsp;&emsp;&emsp;for route in queue:</br>
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;find_connections(graph, route[-1], route)</br>
                 &emsp;&emsp;else:</br></br>
-                &emsp;&emsp;&emsp;&emsp;<span class="text-primary">print(f'No Connections!, stack:{stack}'))</span></br>
+                &emsp;&emsp;&emsp;&emsp;<span class="text-primary">print(f'No Connections!, queue:{queue}'))</span></br>
                 &emsp;&emsp;&emsp;&emsp;<span class="text-primary">print(f'Add to all routes: {visited}')</span></br></br>
                 &emsp;&emsp;&emsp;&emsp;all_routes.append(visited)</br>
                 &emsp;&emsp;return all_routes
@@ -178,14 +180,14 @@
                 &emsp;&emsp;print(f'All Paths: {find_routes(graph, "A")}')</br></br>
                 &emsp;&emsp;OUTPUT:</br>
                 &emsp;&emsp;&emsp;Check connections: (['A'], 'A')</br>
-                &emsp;&emsp;&emsp;stack: [['A', 'B'], ['A', 'C']]</br>
+                &emsp;&emsp;&emsp;queue: [['A', 'B'], ['A', 'C']]</br>
                 &emsp;&emsp;&emsp;Check connections: (['A', 'B'], 'B')</br>
-                &emsp;&emsp;&emsp;stack: [['A', 'B', 'D']]</br>
+                &emsp;&emsp;&emsp;queue: [['A', 'B', 'D']]</br>
                 &emsp;&emsp;&emsp;Check connections: (['A', 'B', 'D'], 'D')</br>
-                &emsp;&emsp;&emsp;No Connections!, stack:[]</br>
+                &emsp;&emsp;&emsp;No Connections!, queue:[]</br>
                 &emsp;&emsp;&emsp;Add to all routes: ['A', 'B', 'D']</br>
                 &emsp;&emsp;&emsp;Check connections: (['A', 'C'], 'C')</br>
-                &emsp;&emsp;&emsp;No Connections!, stack:[]</br>
+                &emsp;&emsp;&emsp;No Connections!, queue:[]</br>
                 &emsp;&emsp;&emsp;Add to all routes: ['A', 'C']</br>
                 &emsp;&emsp;&emsp;All Paths: [['A', 'B', 'D'], ['A', 'C']]</br>
             </div>
