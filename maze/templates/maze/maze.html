@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}  
+    <link rel="stylesheet" href="{% static 'maze/css/maze.css' %}">          
+{% endblock %}
+
+{% block content %}
+    <header class="bg-header h1 p-2 m-0 text-one bg-dark">
+        <a class="text-decoration-none text-light logo" href="#">SimpleAlgo <i class="fas fa-code-branch"></i></a>
+    </header> 
+    <div class="h1 text-center">Maze Sandbox</div>
+{% endblock %}
+
+{% block extra_js %}              
+    <script src="{% static 'maze/js/maze.js' %}" type="text/javascript"></script>
+{% endblock %}
