@@ -8,8 +8,157 @@
 {% block content %}
     <header class="bg-header h1 p-2 m-0 text-one bg-dark">
         <a class="text-decoration-none text-light logo" href="#">SimpleAlgo <i class="fas fa-code-branch"></i></a>
-    </header> 
-    <div class="h1 text-center">Maze Sandbox</div>
+    </header>
+    <div id="token" type="hidden" value="{{ csrf_token }}"></div>
+    <div class="h1 text-center mt-2">Maze Sandbox</div>
+    <div class="start h4 text-center">Choose Start!</div>
+    <div class="end h4 text-center">Choose End!</div>
+    <div class="maze h4 text-center">Add Maze!</div>
+    <div class="sandbox mt-2 mb-5 ms-0 me-0 ms-md-5 me-md--5">
+        <div class="row m-0 text-center">
+            <div class="col-1"></div>
+            <div id="1" class="1 box border border-dark rounded-0 col-1"></div>
+            <div id="2" class="2 box border border-dark rounded-0 col-1"></div>
+            <div id="3" class="3 box border border-dark rounded-0 col-1"></div>
+            <div id="4" class="4 box border border-dark rounded-0 col-1"></div>
+            <div id="5" class="5 box border border-dark rounded-0 col-1"></div>
+            <div id="6" class="6 box border border-dark rounded-0 col-1"></div>
+            <div id="7" class="7 box border border-dark rounded-0 col-1"></div>
+            <div id="8" class="8 box border border-dark rounded-0 col-1"></div>
+            <div id="9" class="9 box border border-dark rounded-0 col-1"></div>
+            <div id="10" class="10 box border border-dark rounded-0 col-1"></div>
+            <div class="box col-1"></div>
+        </div>
+        <div class="row m-0 text-center">
+            <div class="col-1"></div>
+            <div id="11" class="11 box border border-dark rounded-0 col-1"></div>
+            <div id="12" class="12 box border border-dark rounded-0 col-1"></div>
+            <div id="13" class="13 box border border-dark rounded-0 col-1"></div>
+            <div id="14" class="14 box border border-dark rounded-0 col-1"></div>
+            <div id="15" class="15 box border border-dark rounded-0 col-1"></div>
+            <div id="16" class="16 box border border-dark rounded-0 col-1"></div>
+            <div id="17" class="17 box border border-dark rounded-0 col-1"></div>
+            <div id="18" class="18 box border border-dark rounded-0 col-1"></div>
+            <div id="19" class="19 box border border-dark rounded-0 col-1"></div>
+            <div id="20" class="20 box border border-dark rounded-0 col-1"></div>
+            <div class="box col-1"></div>
+        </div>
+        <div class="row m-0 text-center">
+            <div class="col-1"></div>
+            <div id="21" class="21 box border border-dark rounded-0 col-1"></div>
+            <div id="22" class="22 box border border-dark rounded-0 col-1"></div>
+            <div id="23" class="23 box border border-dark rounded-0 col-1"></div>
+            <div id="24" class="24 box border border-dark rounded-0 col-1"></div>
+            <div id="25" class="25 box border border-dark rounded-0 col-1"></div>
+            <div id="26" class="26 box border border-dark rounded-0 col-1"></div>
+            <div id="27" class="27 box border border-dark rounded-0 col-1"></div>
+            <div id="28" class="28 box border border-dark rounded-0 col-1"></div>
+            <div id="29" class="29 box border border-dark rounded-0 col-1"></div>
+            <div id="30" class="30 box border border-dark rounded-0 col-1"></div>
+            <div class="box col-1"></div>
+        </div>
+        <div class="row m-0 text-center">
+            <div class="col-1"></div>
+            <div id="31" class="31 box border border-dark rounded-0 col-1"></div>
+            <div id="32" class="33 box border border-dark rounded-0 col-1"></div>
+            <div id="33" class="33 box border border-dark rounded-0 col-1"></div>
+            <div id="34" class="34 box border border-dark rounded-0 col-1"></div>
+            <div id="35" class="3 box border border-dark rounded-0 col-1"></div>
+            <div id="36" class="36 box border border-dark rounded-0 col-1"></div>
+            <div id="37" class="37 box border border-dark rounded-0 col-1"></div>
+            <div id="38" class="38 box border border-dark rounded-0 col-1"></div>
+            <div id="39" class="39 box border border-dark rounded-0 col-1"></div>
+            <div id="40" class="40 box border border-dark rounded-0 col-1"></div>
+            <div id="2" class="box col-1"></div>
+        </div>
+        <div class="row m-0 text-center">
+            <div class="col-1"></div>
+            <div id="41" class="41 box border border-dark rounded-0 col-1"></div>
+            <div id="42" class="42 box border border-dark rounded-0 col-1"></div>
+            <div id="43" class="43 box border border-dark rounded-0 col-1"></div>
+            <div id="44" class="44 box border border-dark rounded-0 col-1"></div>
+            <div id="45" class="45 box border border-dark rounded-0 col-1"></div>
+            <div id="46" class="46 box border border-dark rounded-0 col-1"></div>
+            <div id="47" class="47 box border border-dark rounded-0 col-1"></div>
+            <div id="48" class="48 box border border-dark rounded-0 col-1"></div>
+            <div id="49" class="49 box border border-dark rounded-0 col-1"></div>
+            <div id="50" class="50 box border border-dark rounded-0 col-1"></div>
+            <div class="box col-1"></div>
+        </div>
+        <div class="row m-0 text-center">
+            <div class="col-1"></div>
+            <div id="51" class="51 box border border-dark rounded-0 col-1"></div>
+            <div id="52" class="52 box border border-dark rounded-0 col-1"></div>
+            <div id="53" class="53 box border border-dark rounded-0 col-1"></div>
+            <div id="54" class="54 box border border-dark rounded-0 col-1"></div>
+            <div id="55" class="55 box border border-dark rounded-0 col-1"></div>
+            <div id="56" class="56 box border border-dark rounded-0 col-1"></div>
+            <div id="57" class="57 box border border-dark rounded-0 col-1"></div>
+            <div id="58" class="58 box border border-dark rounded-0 col-1"></div>
+            <div id="59" class="59 box border border-dark rounded-0 col-1"></div>
+            <div id="60" class="60 box border border-dark rounded-0 col-1"></div>
+            <div class="box col-1"></div>
+        </div>
+        <div class="row m-0 text-center">
+            <div class="col-1"></div>
+            <div id="61" class="61 box border border-dark rounded-0 col-1"></div>
+            <div id="62" class="62 box border border-dark rounded-0 col-1"></div>
+            <div id="63" class="63 box border border-dark rounded-0 col-1"></div>
+            <div id="64" class="64 box border border-dark rounded-0 col-1"></div>
+            <div id="65" class="65 box border border-dark rounded-0 col-1"></div>
+            <div id="66" class="66 box border border-dark rounded-0 col-1"></div>
+            <div id="67" class="6 box border border-dark rounded-0 col-1"></div>
+            <div id="68" class="68 box border border-dark rounded-0 col-1"></div>
+            <div id="69" class="69 box border border-dark rounded-0 col-1"></div>
+            <div id="70" class="10 box border border-dark rounded-0 col-1"></div>
+            <div class="box col-1"></div>
+        </div>
+        <div class="row m-0 text-center">
+            <div class="col-1"></div>
+            <div id="71" class="71 box border border-dark rounded-0 col-1"></div>
+            <div id="72" class="72 box border border-dark rounded-0 col-1"></div>
+            <div id="73" class="73 box border border-dark rounded-0 col-1"></div>
+            <div id="74" class="74 box border border-dark rounded-0 col-1"></div>
+            <div id="75" class="75 box border border-dark rounded-0 col-1"></div>
+            <div id="76" class="76 box border border-dark rounded-0 col-1"></div>
+            <div id="77" class="77 box border border-dark rounded-0 col-1"></div>
+            <div id="78" class="78 box border border-dark rounded-0 col-1"></div>
+            <div id="79" class="79 box border border-dark rounded-0 col-1"></div>
+            <div id="80" class="80 box border border-dark rounded-0 col-1"></div>
+            <div class="box col-1"></div>
+        </div>
+        <div class="row m-0 text-center">
+            <div class="col-1"></div>
+            <div id="81" class="81 box border border-dark rounded-0 col-1"></div>
+            <div id="82" class="82 box border border-dark rounded-0 col-1"></div>
+            <div id="83" class="83 box border border-dark rounded-0 col-1"></div>
+            <div id="84" class="84 box border border-dark rounded-0 col-1"></div>
+            <div id="85" class="85 box border border-dark rounded-0 col-1"></div>
+            <div id="86" class="86 box border border-dark rounded-0 col-1"></div>
+            <div id="87" class="87 box border border-dark rounded-0 col-1"></div>
+            <div id="88" class="88 box border border-dark rounded-0 col-1"></div>
+            <div id="89" class="89 box border border-dark rounded-0 col-1"></div>
+            <div id="90" class="90 box border border-dark rounded-0 col-1"></div>
+            <div class="box col-1"></div>
+        </div>
+        <div class="row m-0 text-center">
+            <div class="col-1"></div>
+            <div id="91" class="91 box border border-dark rounded-0 col-1"></div>
+            <div id="92" class="92 box border border-dark rounded-0 col-1"></div>
+            <div id="93" class="93 box border border-dark rounded-0 col-1"></div>
+            <div id="94" class="94 box border border-dark rounded-0 col-1"></div>
+            <div id="95" class="95 box border border-dark rounded-0 col-1"></div>
+            <div id="96" class="96 box border border-dark rounded-0 col-1"></div>
+            <div id="97" class="97 box border border-dark rounded-0 col-1"></div>
+            <div id="98" class="98 box border border-dark rounded-0 col-1"></div>
+            <div id="99" class="99 box border border-dark rounded-0 col-1"></div>
+            <div id="100" class="100 box border border-dark rounded-0 col-1"></div>
+            <div class="box col-1"></div>
+        </div>
+        <div class="text-center mt-2">
+            <div class="find-route btn btn-outline-primary btn-sm">Find Route!</div>
+        </div>        
+    </div>
 {% endblock %}
 
 {% block extra_js %}              

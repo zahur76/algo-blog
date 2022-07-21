@@ -1,3 +1,22 @@
 .logo:hover {
     color: lightgrey !important;
 }
+
+.box {
+    height: 70px;
+}
+
+
+@media screen and (max-width: 768px){
+    .box {
+        height: 50px;
+    }    
+    
+}
+
+@media screen and (max-width: 576px){
+    .box {
+        height: 30px;
+    }    
+    
+} 
