@@ -7,43 +7,6 @@ import json
 
 all_routes = []
 # Create your views here
-def maze_row(row):
-    list = []
-    row = int(row)
-    list.append([row-1, row+1, row-10, row+10])
-    return list[0]
-
-
-def find_connections(graph, vertex, visited):
-    stack = [] 
-    for node in graph[vertex]:
-        if node not in visited:
-            stack.append(visited + [node]) 
-
-    if stack:
-        for route in stack:
-            find_connections(graph, route[-1], route)
-    else:
-        all_routes.append(visited)
-    return all_routes
-
-
-def find_routes(graph, vertex, end, visited=[]):    
-   
-    visited.append(vertex)    
-        
-    paths = find_connections(graph, vertex, visited)
-
-    my_paths = []
-    for route in paths:
-        if end in route:
-            my_paths.append(route[:route.index(end)+1])
-    path_length = []
-    for path in my_paths:
-        path_length.append(len(path))
-    index_minimum = path_length.index(min(path_length))
-    return my_paths[index_minimum]
-
 
 def maze(request):
     """ 
@@ -56,9 +19,39 @@ def maze(request):
 
 @require_http_methods(["POST"])
 def compute_maze(request):
-         
 
-    data = json.loads(request.body.decode())
+    def find_connections(graph, vertex, visited):
+        stack = [] 
+        for node in graph[vertex]:
+            if node not in visited:
+                stack.append(visited + [node]) 
+
+        if stack:
+            for route in stack:
+                find_connections(graph, route[-1], route)
+        else:
+            all_routes.append(visited)
+        return all_routes
+
+
+    def find_routes(graph, vertex, end, visited=[]):    
+    
+        visited.append(vertex)    
+            
+        paths = find_connections(graph, vertex, visited)
+
+        my_paths = []
+        for route in paths:
+            if end in route:
+                my_paths.append(route[:route.index(end)+1])
+        path_length = []
+        for path in my_paths:
+            path_length.append(len(path))
+        index_minimum = path_length.index(min(path_length))
+
+        return my_paths[index_minimum]       
+
+    data = json.loads(request.body)
 
     print(data)
 
@@ -102,4 +95,11 @@ def compute_maze(request):
     except:
         result = None
     print(result)
-    return JsonResponse({'path': result})
+
+    return JsonResponse({'path': result[1:]})
+
+def reset_maze(request):
+    global all_routes
+    all_routes = []
+    print(all_routes)
+    return JsonResponse({'status': 'ok'})
