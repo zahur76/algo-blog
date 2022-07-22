@@ -66,16 +66,23 @@ $(document).ready(function(){
             throw new Error('Something went wrong');
             })
             .then((responseJson) => {
-                $('.maze').hide();
-                $('.solution').show();
-                $('.find-route').hide();
-                $('.reset').show();
-                result = responseJson['path']
-                responseJson['path'].forEach(element => {
-                    $(`#${element}`).addClass('bg-warning');
-                });
-                $(`#${start_node}`).addClass('bg-primary')
-
+                if(responseJson['path']==='None'){
+                    console.log('none')
+                    $('.maze').hide();
+                    $('.solution').show().html('No Solution Found!');
+                    $('.find-route').hide();
+                    $('.reset').show();
+                }else{
+                    $('.maze').hide();
+                    $('.solution').show().html('Solution Found!');
+                    $('.find-route').hide();
+                    $('.reset').show();
+                    result = responseJson['path']
+                    responseJson['path'].forEach(element => {
+                        $(`#${element}`).addClass('bg-warning');
+                    });
+                    $(`#${start_node}`).addClass('bg-primary')
+                }
             })
             .catch((error) => {
                     console.log(error)
@@ -83,7 +90,6 @@ $(document).ready(function(){
     })
 
     $('.reset').click(function(){
-        console.log('zahur')
         maze_node.forEach(element => {
             $(`#${element}`).attr('class', 'box border border-dark rounded-0 col-1')
         })
@@ -91,6 +97,7 @@ $(document).ready(function(){
             $(`#${element}`).attr('class', 'box border border-dark rounded-0 col-1')
         })
         $(`#${start_node}`).attr('class', 'box border border-dark rounded-0 col-1')
+        $(`#${end_node}`).attr('class', 'box border border-dark rounded-0 col-1')
         start = false
         end = false
         click = true

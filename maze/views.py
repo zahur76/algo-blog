@@ -96,7 +96,9 @@ def compute_maze(request):
         result = None
     print(result)
 
-    return JsonResponse({'path': result[1:]})
+    if result:
+        return JsonResponse({'path': result[1:]})
+    return JsonResponse({'path': 'None'})
 
 def reset_maze(request):
     global all_routes
