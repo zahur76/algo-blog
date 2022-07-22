@@ -1,7 +1,8 @@
-$(document).ready(function(){ 
+$(document).ready(function(){
     
-    let start = false
-    let end = false
+    let start = false;
+    let end = false;
+    let click = true;
 
     $('.end').hide();
     $('.maze').hide();
@@ -13,7 +14,7 @@ $(document).ready(function(){
     let end_node = null;
     let maze_node  = [];
     let result = [];
-
+    
     $('.box').click(function(){
         let node = $(this).attr('id');
         if(!start){
@@ -28,17 +29,30 @@ $(document).ready(function(){
             $('.end').hide();
             $('.maze').show();
             end_node = $(this).attr("id")
-        }else if(node!==start_node && node!==end_node){
-            console.log($(this).attr('id'));
-            $(this).addClass('bg-dark');
-            $('.find-route').show();
-            maze_node.push(node)
+        }else if(node!==start_node && node!==end_node && click){
+            if(maze_node.includes(node)){
+                $(this).removeClass('bg-dark');
+                var index = maze_node.indexOf(node);
+                if (index !== -1) {
+                maze_node.splice(index, 1);
+                }
+                console.log(maze_node)
+            }else{
+                console.log($(this).attr('id'));
+                $(this).addClass('bg-dark');
+                $('.find-route').show();
+                maze_node.push(node)
+                console.log(maze_node)
+            }
+            
         }
     })
 
 
     // send maze layout
-    $('.find-route').click(function(){     
+    $('.find-route').click(function(){
+        click = false
+
         let uniqueMaze = [...new Set(maze_node)];
 
         let csrfToken = $("#token").attr('value');
@@ -79,6 +93,7 @@ $(document).ready(function(){
         $(`#${start_node}`).attr('class', 'box border border-dark rounded-0 col-1')
         start = false
         end = false
+        click = true
         start_node = null
         end_node = null
         maze_node = []
