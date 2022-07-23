@@ -6,6 +6,10 @@
     height: 70px;
 }
 
+.home {
+    line-height: 30px;
+}
+
 
 @media screen and (max-width: 768px){
     .box {

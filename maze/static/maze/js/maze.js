@@ -74,7 +74,7 @@ $(document).ready(function(){
                     $('.reset').show();
                 }else{
                     $('.maze').hide();
-                    $('.solution').show().html('Solution Found!');
+                    $('.solution').show().html('Maze Solved!');
                     $('.find-route').hide();
                     $('.reset').show();
                     result = responseJson['path']

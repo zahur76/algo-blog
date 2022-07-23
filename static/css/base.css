@@ -41,6 +41,10 @@ body, html {
     font-family: 'Source Code Pro', monospace;
 }
 
+.maze-text {
+    font-family: 'Source Code Pro', monospace;
+}
+
 /* media screen repoonsive design */
 
 @media screen and (max-width: 992px){
