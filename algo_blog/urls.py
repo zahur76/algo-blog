@@ -17,10 +17,16 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
+from home.sitemaps import StaticViewSitemap
+sitemaps = {
+    'static': StaticViewSitemap
+}
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("home.urls")),
     path("maze/", include("maze.urls")),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps})
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
