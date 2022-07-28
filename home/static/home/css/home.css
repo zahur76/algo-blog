@@ -50,13 +50,21 @@ section {
 
 
 /* media screen repoonsive design */
+@media screen and (max-width: 992px){
+    .article {
+        width: 80% !important;
+        padding: 5px !important;
+        font-size: 15px;
+    }    
+    
+} 
+
 @media screen and (max-width: 768px){
     .article {
         width: 90% !important;
         padding: 5px !important;
         font-size: 15px;
-    }
-    
+    }    
     
 } 
 
