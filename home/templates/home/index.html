@@ -7,21 +7,25 @@
 
 {% block content %}
     <div class="hero">
-        <div class="title text-light text-two h1">Finding Node Network Routes</div>
+        <div class="title text-light text-two h1">Finding Node Network Routes: Part One</div>
         <div class="overlay"></div>
     </div>
     <header class="bg-header h1 p-2 m-0 text-one">
-        <a class="text-decoration-none text-light logo" href="#">SimpleAlgo <i class="fas fa-code-branch"></i></a>
+        <a class="text-decoration-none text-light logo" href="{% url 'home' %}">SimpleAlgo <i class="fas fa-code-branch"></i></a>
     </header>    
     
     <div class="text-secondary fst-italic p-2">By Zahur Meerun July 2022</div>
     <section class="p-1 mt-0 text-two">
+        <div class="col-12 h2 text-primary text-center">Content</div>
+        <div class="article ps-5 pe-5 w-75 mx-auto"><a class="text-decoration-none" href="{% url 'home' %}">Part 1</a>: Laying down the basics</br>
+            <a class="text-decoration-none"  href="{% url 'part_two' %}">Part 2</a>:  Applying our algorithm to a Practical Problem</br>
+        </div></br>
         <div class="col-12 h2 text-primary text-center">Tutorial Objective</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">This article's objective is to simply explain the algorithm used in finding all possible routes within a network of connected nodes.</br></br>
 
             There are many articles covering this topic that tend to be more for the more experienced programmer and can be hard to grasp for people who are relatively new to programming.</br></br>
             
-            This article will break down the coding process into small parts which can easily be digested so we can understand the core concepts involved. For coding we will use python.
+            We will break down the coding process into small parts which can easily be digested so we can understand the core concepts involved. For coding we will use python.
         </div>
         <div class="col-12 h2 text-primary text-center mt-5">How Data is stored</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">
@@ -259,7 +263,7 @@
             Great! We started with a network of nodes represented by a graph and returned all 5 possible routes without revisiting a node. From there we further extended our
             functionality by returning the minimum path between 2 nodes.
             My next tutorial will expand on this topic and apply 
-            what we have learned to a real-life problem, Part 2. This brings us to the end of the tutorial, hope you have enjoyed it. Please send any feedback
+            what we have learned to a real-life problem, <a href="{% url 'part_two' %}">Part 2</a>. This brings us to the end of the tutorial, hope you have enjoyed it. Please send any feedback
             by filling out the form below.</br>
         </div>     
     </section>

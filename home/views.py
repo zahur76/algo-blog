@@ -38,3 +38,6 @@ def send_comment(request):
         )
     messages.success(request, "Thanks for your Feedback!")
     return redirect(reverse("home"))
+
+def part_two(request):
+    return render(request, "home/part_two.html")
