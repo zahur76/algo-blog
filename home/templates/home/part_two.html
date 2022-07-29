@@ -20,13 +20,59 @@
         <div class="article ps-5 pe-5 w-75 mx-auto"><a class="text-decoration-none" href="{% url 'home' %}">Part 1</a>: Laying down the basics</br>
             <a class="text-decoration-none"  href="{% url 'part_two' %}">Part 2</a>:  Applying our algorithm to a Practical Problem</br>
         </div></br>
-        <div class="col-12 h2 text-primary text-center"> Part Two: The London Underground</div>
+        <div class="col-12 h2 text-primary text-center"> Part Two: Practical Example</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">In part 1 of this tutorial We started with a network of nodes represented by a graph and returned all 5 possible routes without revisiting a node. We further extended our
             functionality by returning the minimum path between 2 nodes.
             Now we will expand on this topic and apply what we have learned to a real-life problem</br></br>
+        </div>
+        <div class="col-12 h2 text-primary text-center">The London Underground <i class="fas fa-subway"></i></div>
+        <div class="article ps-5 pe-5 w-75 mx-auto">The London Underground would be a perfect example to test our search algorithm by obtaining all paths between 2 points,
+            our departure and arrival.</br></br>
+            The Tube is made up of 11 lines, but to simplify things we will only be interested in 5, namely:
+            <ul>
+                <li class="text-danger fw-bold">Central Line</li>
+                <li class="text-dark fw-bold">Northern Line</li>
+                <li class="text-warning fw-bold">Circle Line</li>
+                <li class="text-info fw-bold">Victoria Line</li>
+                <li class="text-brown fw-bold">Bakerloo Line</li>
+            </ul>
+            Below is embeded the London Underground Map so you can familiarise yourself with the layout. As you can see, the 5 tube lines cover a vast majority
+            of the network.
+        </br></br>
             <div class="text-center mb-5"><embed src="https://content.tfl.gov.uk/standard-tube-map.pdf" width="90%" height="500px" type="application/pdf"></div>
+        </div>
+        <div class="col-12 h2 text-primary text-center"> Our Graph</div>
+        <div class="article ps-5 pe-5 w-75 mx-auto mb-5">
+            Since we can consider each station as a node with edges connecting to other stations, we basically have a node network similar to what we used in part 1.</br></br>
+            <div class="text-center tree"><img src="{{ MEDIA_URL }}tube.png" alt="data tree structure" /></div>
+            The only difference being that each node (station) is linked to 1 or more Underground lines. To cater for this requirement we can adjust our graph so as each node will contain a key-value pair
+            consisting of a station (key) and another dictionary (value) made up tube line names and connections.
+            <div class="d-flex justify-content-center mt-3 mb-3">
+                <div class="ps-2 code-text text-dark fw-bold">
+                    graph = {"Station name": {"Tube name": [list of tubes arriving at this station],</br>&emsp;&emsp;&emsp;&emsp;&emsp;"Connections": [list of all connecting stations]}}
+                </div>           
+            </div>
+            I have put togther the required graph using our 5 lines and since it is quite bulky I have linked it<span class="btn text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">here.</span>
         </div>         
     </section>
+    <!-- graph modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block extra_js %}              
