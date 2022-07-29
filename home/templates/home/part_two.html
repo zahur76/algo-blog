@@ -43,7 +43,7 @@
         </div>
         <div class="col-12 h2 text-primary text-center"> Our Graph</div>
         <div class="article ps-5 pe-5 w-75 mx-auto mb-5">
-            Since we can consider each station as a node with edges connecting to other stations, we have a node network similar to what we used in part 1.</br></br>
+            Since we can consider each station as a node with edges connecting to other stations, we have a node network similar to what we used in <a class="text-decoration-none" href="{% url 'home' %}">Part 1</a>.</br></br>
             <div class="text-center tree"><img src="{{ MEDIA_URL }}tube.png" alt="data tree structure" /></div>
             The only difference being that each node (station) is linked to 1 or more Underground lines. To cater for this requirement we can adjust our graph so as each node will contain a key-value pair
             consisting of a station (key) and another dictionary (value) made up tube line names and connections.
@@ -52,8 +52,53 @@
                     graph = {"Station name": {"Tube name": [list of tubes arriving at this station],</br>&emsp;&emsp;&emsp;&emsp;&emsp;"Connections": [list of all connecting stations]}}
                 </div>           
             </div>
-            I have put togther the required graph using our 5 chosen line. Since it is quite bulky I have linked it<span class="btn text-primary ps-1 pt-1" data-bs-toggle="modal" data-bs-target="#exampleModal">here.</span>
-        </div>         
+            I have put togther the required graph using our 5 chosen line and linked it<a class="text-decoration-none" href="https://github.com/zahur76/algo-blog/blob/master/docs/underground.py" target="_blank"> here.</a>
+        </div>
+        <div class="col-12 h2 text-primary text-center"> Code Recap</div>
+        <div class="article ps-5 pe-5 w-75 mx-auto mb-5">
+            We will be using our code derived in part 1. The final code returned the shortest path available from 2 nodes. We will
+            modify this code to return the 5 shortest paths since this will be more interesting in our case.</br></br>
+            The steps will be the same as previously described only with only a few minor modifictions to our code. If you wish to have a recap of the code functionality please go back to <a class="text-decoration-none" href="{% url 'home' %}">Part 1</a>.</br></br>
+            Since we have modified our graph to accomodate all tubes lines arriving at our station we will have to update our recursive code to cater for this.
+
+            <div class="d-flex justify-content-center mb-3">
+                <div class="ps-2 code-text text-light bg-dark p-2 fw-bold mt-3 border border-5 border-primary">
+                    def find_path(graph, vertex, visited):</br>
+                    &emsp;&emsp;queue= []</br></br>
+                    &emsp;&emsp;<span class="text-primary">print(f'Check connections: {visited , vertex}')</span></br></br>
+                    &emsp;&emsp;for node in graph[vertex]<span class="text-warning">['Connections']</span>:</br>
+                    &emsp;&emsp;&emsp;&emsp;if node not in visited:</br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;queue.append(visited + [node])</br>
+                    &emsp;&emsp;if stack:</br></br>
+                    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">print(f'queue: {queue}')</span></br></br>
+                    &emsp;&emsp;&emsp;&emsp;for route in queue:</br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;find_connections(graph, route[-1], route)</br>
+                    &emsp;&emsp;else:</br></br>
+                    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">print(f'No Connections!, queue:{queue}'))</span></br>
+                    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">print(f'Add to all routes: {visited}')</span></br></br>
+                    &emsp;&emsp;&emsp;&emsp;all_routes.append(visited)</br>
+                    &emsp;&emsp;return all_routes
+                </div>
+            </div>
+                Secondly we need to modify our initial code to so as to return only the first 5 paths with shortest lengths.</br>
+                <div class="d-flex justify-content-center">
+                    <div class="ps-2 code-text text-light bg-dark p-2 fw-bold mt-3 border border-5 border-primary">
+                        def find_routes(graph, vertex, end_node, visited=[]):</br>
+                        &emsp;&emsp;visited.append(vertex)</br>
+                        &emsp;&emsp;paths = find_connections(graph, vertex, visited)</br>
+                        &emsp;&emsp;all_paths = []</br>
+                        &emsp;&emsp;for route in all_paths:</br>
+                        &emsp;&emsp;&emsp;&emsp;if end_node in route:</br>
+                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;my_paths.append(route[:route.index(end_node)+1])</br>
+                        &emsp;&emsp;path_length = []</br>
+                        &emsp;&emsp;for path in my_paths:</br>
+                        &emsp;&emsp;&emsp;&emsp;path_length.append(len(path))</br>
+                        &emsp;&emsp;index_of_minimum = path_length.index(min(path_length))</br>
+                        &emsp;&emsp;return my_paths[index_of_minimum]</br>
+                    </div>
+                </div></br>
+            </div></br>
+        </div>
     </section>
 {% endblock %}
 
