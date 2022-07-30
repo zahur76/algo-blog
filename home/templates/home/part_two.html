@@ -54,34 +54,32 @@
             </div>
             I have put togther the required graph using our 5 chosen line and linked it<a class="text-decoration-none" href="https://github.com/zahur76/algo-blog/blob/master/docs/underground.py" target="_blank"> here.</a>
         </div>
-        <div class="col-12 h2 text-primary text-center"> Code Recap</div>
-        <div class="article ps-5 pe-5 w-75 mx-auto mb-5">
+        <div class="col-12 h2 text-primary text-center"> Code Recap And Update</div>
+        <div class="article ps-5 pe-5 w-75 mx-auto mb-3">
             We will be using our code derived in part 1. The final code returned the shortest path available from 2 nodes. We will
-            modify this code to return the 5 shortest paths since this will be more interesting in our case.</br></br>
-            The steps will be the same as previously described only with only a few minor modifictions to our code. If you wish to have a recap of the code functionality please go back to <a class="text-decoration-none" href="{% url 'home' %}">Part 1</a>.</br></br>
+            modify this code to return the 3 shortest paths available.</br></br>
+            The steps will be the same as previously described with only a few modifictions to our code. If you wish to have a recap of the code functionality please go back to <a class="text-decoration-none" href="{% url 'home' %}">Part 1</a>.</br></br>
             Since we have modified our graph to accomodate all tubes lines arriving at our station we will have to update our recursive code to cater for this.
 
-            <div class="d-flex justify-content-center mb-3">
+            <div class="d-flex justify-content-center mb-4 mt-3">
                 <div class="ps-2 code-text text-light bg-dark p-2 fw-bold mt-3 border border-5 border-primary">
                     def find_path(graph, vertex, visited):</br>
-                    &emsp;&emsp;queue= []</br></br>
-                    &emsp;&emsp;<span class="text-primary">print(f'Check connections: {visited , vertex}')</span></br></br>
+                    &emsp;&emsp;queue= []</br></br>    
                     &emsp;&emsp;for node in graph[vertex]<span class="text-warning">['Connections']</span>:</br>
                     &emsp;&emsp;&emsp;&emsp;if node not in visited:</br>
                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;queue.append(visited + [node])</br>
                     &emsp;&emsp;if stack:</br></br>
-                    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">print(f'queue: {queue}')</span></br></br>
                     &emsp;&emsp;&emsp;&emsp;for route in queue:</br>
                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;find_connections(graph, route[-1], route)</br>
                     &emsp;&emsp;else:</br></br>
-                    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">print(f'No Connections!, queue:{queue}'))</span></br>
-                    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">print(f'Add to all routes: {visited}')</span></br></br>
                     &emsp;&emsp;&emsp;&emsp;all_routes.append(visited)</br>
                     &emsp;&emsp;return all_routes
                 </div>
             </div>
-                Secondly we need to modify our initial code to so as to return only the first 5 paths with shortest lengths.</br>
-                <div class="d-flex justify-content-center">
+                Secondly we need to modify our initial code to so as to return only the first 3 paths with shortest lengths. We will
+                sort all path retuned from shortest to longest and then add the lines which service these stations, returning only the 
+                first 3 paths.</br>
+                <div class="d-flex justify-content-center mt-3">
                     <div class="ps-2 code-text text-light bg-dark p-2 fw-bold mt-3 border border-5 border-primary">
                         def find_routes(graph, vertex, end_node, visited=[]):</br>
                         &emsp;&emsp;visited.append(vertex)</br>
@@ -90,14 +88,31 @@
                         &emsp;&emsp;for route in all_paths:</br>
                         &emsp;&emsp;&emsp;&emsp;if end_node in route:</br>
                         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;my_paths.append(route[:route.index(end_node)+1])</br>
-                        &emsp;&emsp;path_length = []</br>
-                        &emsp;&emsp;for path in my_paths:</br>
-                        &emsp;&emsp;&emsp;&emsp;path_length.append(len(path))</br>
-                        &emsp;&emsp;index_of_minimum = path_length.index(min(path_length))</br>
-                        &emsp;&emsp;return my_paths[index_of_minimum]</br>
+                        &emsp;&emsp;<span class="text-warning">my_paths = sorted(my_paths, key = len)</span></br>
+                        &emsp;&emsp;<span class="text-warning">station_path = []</span></br>
+                        &emsp;&emsp;<span class="text-warning">for path in my_paths:</span></br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="text-warning">new_list = [{station: graph[station]["Line"]} for station in path]</span></br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="text-warning">new_list = station_path.append(new_list)</span></br>
+                        &emsp;&emsp;return station_path[:3]</br>
                     </div>
                 </div></br>
+        </div></br>
+        <div class="col-12 h2 text-primary text-center"> Code Output</div>
+        <div class="article ps-5 pe-5 w-75 mx-auto mb-3">For our first code run we will use departure station as 'Morden' and arrival as 'Stonebridge Park' together with our graph.</br>
+            <div class="d-flex justify-content-center mt-3">
+                <div class="ps-2 code-text text-light bg-dark p-2 fw-bold mt-3 border border-5 border-primary">
+                    find_routes(graph, 'Morden', 'Stonebridge Park'):</br>
+                    Output:</br>
+                    &emsp;&emsp;[[{'Morden': ['Northern Line']}, {'South Wimbledon': ['Northern Line']}, {'Colliers Wood': ['Northern Line']}, {'Tooting Broadway': ['Northern Line']}, {'Tooting Bec': ['Northern Line']}, {'Balham': ['Northern Line']}, {'Clapham South': ['Northern Line']}, {'Clapham Common': ['Northern Line']}, {'Clapham North': ['Northern Line']}, {'Oval': ['Northern Line']}, {'Stockwell': ['Northern Line', 'Victoria Line']}, {'Vauxhall': ['Victoria Line']}, {'Pimlico': ['Victoria Line']}, {'Victoria': ['Victoria Line', 'Circle Line']}, {'Green Park': ['Victoria Line']}, {'Oxford Circus': ['Central Line', 'Victoria Line', 'Bakerloo Line']}, {"Regent's Park": ['Bakerloo Line']}, {'Baker Street': ['Circle Line', 'Bakerloo Line']}, {'Edgware Road': ['Circle Line', 'Bakerloo Line']}, {'Warwick Avenue': ['Bakerloo Line']}, {'Maida Vale': ['Bakerloo Line']}, {'Kilburn Park': ['Bakerloo Line']}, {"Queen's Park": ['Bakerloo Line']}, {'Kensal Green': ['Bakerloo Line']}, {'Willesdon Junction': ['Bakerloo Line']}, {'Harlesdon': ['Bakerloo Line']}, {'Stonebridge Park': ['Bakerloo Line']}], [{'Morden': ['Northern Line']}, {'South Wimbledon': ['Northern Line']}, {'Colliers Wood': ['Northern Line']}, {'Tooting Broadway': ['Northern Line']}, {'Tooting Bec': ['Northern Line']}, {'Balham': ['Northern Line']}, {'Clapham South': ['Northern Line']}, {'Clapham Common': ['Northern Line']}, {'Clapham North': ['Northern Line']}, {'Oval': ['Northern Line']}, {'Kennington': ['Northern Line']}, {'Waterloo': ['Northern Line', 'Bakerloo Line']}, {'Embankment': ['Northern Line', 'Circle Line', 'Bakerloo Line']}, {'Charing Cross': ['Northern Line', 'Bakerloo Line']}, {'Picadilly Circus': ['Bakerloo Line']}, {'Oxford Circus': ['Central Line', 'Victoria Line', 'Bakerloo Line']}, {"Regent's Park": ['Bakerloo Line']}, {'Baker Street': ['Circle Line', 'Bakerloo Line']}, {'Edgware Road': ['Circle Line', 'Bakerloo Line']}, {'Warwick Avenue': ['Bakerloo Line']}, {'Maida Vale': ['Bakerloo Line']}, {'Kilburn Park': ['Bakerloo Line']}, {"Queen's Park": ['Bakerloo Line']}, {'Kensal Green': ['Bakerloo Line']}, {'Willesdon Junction': ['Bakerloo Line']}, {'Harlesdon': ['Bakerloo Line']}, {'Stonebridge Park': ['Bakerloo Line']}], [{'Morden': ['Northern Line']}, {'South Wimbledon': ['Northern Line']}, {'Colliers Wood': ['Northern Line']}, {'Tooting Broadway': ['Northern Line']}, {'Tooting Bec': ['Northern Line']}, {'Balham': ['Northern Line']}, {'Clapham South': ['Northern Line']}, {'Clapham Common': ['Northern Line']}, {'Clapham North': ['Northern Line']}, {'Oval': ['Northern Line']}, {'Stockwell': ['Northern Line', 'Victoria Line']}, {'Vauxhall': ['Victoria Line']}, {'Pimlico': ['Victoria Line']}, {'Victoria': ['Victoria Line', 'Circle Line']}, {'Green Park': ['Victoria Line']}, {'Oxford Circus': ['Central Line', 'Victoria Line', 'Bakerloo Line']}, {"Regent's Park": ['Bakerloo Line']}, {'Baker Street': ['Circle Line', 'Bakerloo Line']}, {'Marylebone': ['Bakerloo Line']}, {'Edgware Road': ['Circle Line', 'Bakerloo Line']}, {'Warwick Avenue': ['Bakerloo Line']}, {'Maida Vale': ['Bakerloo Line']}, {'Kilburn Park': ['Bakerloo Line']}, {"Queen's Park": ['Bakerloo Line']}, {'Kensal Green': ['Bakerloo Line']}, {'Willesdon Junction': ['Bakerloo Line']}, {'Harlesdon': ['Bakerloo Line']}, {'Stonebridge Park': ['Bakerloo Line']}]]</br>
+                </div>
             </div></br>
+            If we were to analyse the all returned paths we can see that the routes returned is as expected. We can even see when a change in lines occured! The information 
+            returned is nice for data point of view, however is not easy to follow through. Now its time to see if we can tranform our code into something more visually appealing. 
+        </div>
+        <div class="col-12 h2 text-primary text-center">Django save's the day!</div>
+        <div class="article ps-5 pe-5 w-75 mx-auto mb-3">
+            Similar to the map sandbox we will now implement an application allowing us to show us our output in a more presentable way. We will make
+            use forms to allow us to input any 2 stations for departure and arrival and execute our code in the backend.
         </div>
     </section>
 {% endblock %}
