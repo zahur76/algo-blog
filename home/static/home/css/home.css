@@ -81,5 +81,9 @@ section {
     .tree img, .binary-tree img {
         max-width: 250px;
     }
+
+    .station-path .form-select {
+        width: 75% !important;
+    }
 } 
 

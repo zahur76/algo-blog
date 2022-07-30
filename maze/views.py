@@ -94,7 +94,6 @@ def compute_maze(request):
         result = find_routes(maze_dictionary, data['start_node'], data['end_node'])
     except:
         result = None
-    print(result)
 
     if result:
         return JsonResponse({'path': result[1:]})
@@ -103,5 +102,4 @@ def compute_maze(request):
 def reset_maze(request):
     global all_routes
     all_routes = []
-    print(all_routes)
     return JsonResponse({'status': 'ok'})

@@ -106,13 +106,30 @@
                     &emsp;&emsp;[[{'Morden': ['Northern Line']}, {'South Wimbledon': ['Northern Line']}, {'Colliers Wood': ['Northern Line']}, {'Tooting Broadway': ['Northern Line']}, {'Tooting Bec': ['Northern Line']}, {'Balham': ['Northern Line']}, {'Clapham South': ['Northern Line']}, {'Clapham Common': ['Northern Line']}, {'Clapham North': ['Northern Line']}, {'Oval': ['Northern Line']}, {'Stockwell': ['Northern Line', 'Victoria Line']}, {'Vauxhall': ['Victoria Line']}, {'Pimlico': ['Victoria Line']}, {'Victoria': ['Victoria Line', 'Circle Line']}, {'Green Park': ['Victoria Line']}, {'Oxford Circus': ['Central Line', 'Victoria Line', 'Bakerloo Line']}, {"Regent's Park": ['Bakerloo Line']}, {'Baker Street': ['Circle Line', 'Bakerloo Line']}, {'Edgware Road': ['Circle Line', 'Bakerloo Line']}, {'Warwick Avenue': ['Bakerloo Line']}, {'Maida Vale': ['Bakerloo Line']}, {'Kilburn Park': ['Bakerloo Line']}, {"Queen's Park": ['Bakerloo Line']}, {'Kensal Green': ['Bakerloo Line']}, {'Willesdon Junction': ['Bakerloo Line']}, {'Harlesdon': ['Bakerloo Line']}, {'Stonebridge Park': ['Bakerloo Line']}], [{'Morden': ['Northern Line']}, {'South Wimbledon': ['Northern Line']}, {'Colliers Wood': ['Northern Line']}, {'Tooting Broadway': ['Northern Line']}, {'Tooting Bec': ['Northern Line']}, {'Balham': ['Northern Line']}, {'Clapham South': ['Northern Line']}, {'Clapham Common': ['Northern Line']}, {'Clapham North': ['Northern Line']}, {'Oval': ['Northern Line']}, {'Kennington': ['Northern Line']}, {'Waterloo': ['Northern Line', 'Bakerloo Line']}, {'Embankment': ['Northern Line', 'Circle Line', 'Bakerloo Line']}, {'Charing Cross': ['Northern Line', 'Bakerloo Line']}, {'Picadilly Circus': ['Bakerloo Line']}, {'Oxford Circus': ['Central Line', 'Victoria Line', 'Bakerloo Line']}, {"Regent's Park": ['Bakerloo Line']}, {'Baker Street': ['Circle Line', 'Bakerloo Line']}, {'Edgware Road': ['Circle Line', 'Bakerloo Line']}, {'Warwick Avenue': ['Bakerloo Line']}, {'Maida Vale': ['Bakerloo Line']}, {'Kilburn Park': ['Bakerloo Line']}, {"Queen's Park": ['Bakerloo Line']}, {'Kensal Green': ['Bakerloo Line']}, {'Willesdon Junction': ['Bakerloo Line']}, {'Harlesdon': ['Bakerloo Line']}, {'Stonebridge Park': ['Bakerloo Line']}], [{'Morden': ['Northern Line']}, {'South Wimbledon': ['Northern Line']}, {'Colliers Wood': ['Northern Line']}, {'Tooting Broadway': ['Northern Line']}, {'Tooting Bec': ['Northern Line']}, {'Balham': ['Northern Line']}, {'Clapham South': ['Northern Line']}, {'Clapham Common': ['Northern Line']}, {'Clapham North': ['Northern Line']}, {'Oval': ['Northern Line']}, {'Stockwell': ['Northern Line', 'Victoria Line']}, {'Vauxhall': ['Victoria Line']}, {'Pimlico': ['Victoria Line']}, {'Victoria': ['Victoria Line', 'Circle Line']}, {'Green Park': ['Victoria Line']}, {'Oxford Circus': ['Central Line', 'Victoria Line', 'Bakerloo Line']}, {"Regent's Park": ['Bakerloo Line']}, {'Baker Street': ['Circle Line', 'Bakerloo Line']}, {'Marylebone': ['Bakerloo Line']}, {'Edgware Road': ['Circle Line', 'Bakerloo Line']}, {'Warwick Avenue': ['Bakerloo Line']}, {'Maida Vale': ['Bakerloo Line']}, {'Kilburn Park': ['Bakerloo Line']}, {"Queen's Park": ['Bakerloo Line']}, {'Kensal Green': ['Bakerloo Line']}, {'Willesdon Junction': ['Bakerloo Line']}, {'Harlesdon': ['Bakerloo Line']}, {'Stonebridge Park': ['Bakerloo Line']}]]</br>
                 </div>
             </div></br>
-            If we were to analyse the all returned paths we can see that the routes returned is as expected. We can even see when a change in lines occured! The information 
+            If we were to analyse the all returned paths we can see that the routes returned is as expected. We can even see when a change in tube line occured! The information 
             returned is nice for data point of view, however is not easy to follow through. Now its time to see if we can tranform our code into something more visually appealing. 
         </div>
-        <div class="col-12 h2 text-primary text-center">Django save's the day!</div>
-        <div class="article ps-5 pe-5 w-75 mx-auto mb-3">
-            Similar to the map sandbox we will now implement an application allowing us to show us our output in a more presentable way. We will make
+        <div class="col-12 h2 text-primary text-center mt-5">Django save's the day!</div>
+        <div class="article ps-5 pe-5 w-75 mx-auto mb-5">
+            Similar to the map sandbox, we will now implement an application allowing us to show us our output in a more presentable way. We will make
             use forms to allow us to input any 2 stations for departure and arrival and execute our code in the backend.
+
+            <form action="#" method="POST" class="station-path mb-3 text-center">
+                <input type="hidden" id="token" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                <select class="form-select mb-3 mt-3 w-50 mx-auto" id="departure" name="departure" aria-label="Default select example" required>
+                    <option value="" selected>Departure Station</option>
+                    {% for station in stations %}
+                        <option value="{{station}}">{{station}}</option>
+                    {% endfor %}
+                </select>
+                <select class="form-select mb-3 mt-3 w-50 mx-auto" id="arrival" name="arrival" aria-label="Default select example" required>
+                    <option value="" selected>Arrival Station</option>
+                    {% for station in stations %}
+                        <option value="{{station}}">{{station}}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="submit-stations btn btn-primary">Find Routes</button>
+            </form>
         </div>
     </section>
 {% endblock %}
