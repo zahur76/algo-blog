@@ -40,6 +40,18 @@ $(document).ready(function(){
                 })
                 .then((responseJson) => {
                     console.log(responseJson)
+                    let i=0;
+                    responseJson['path'].forEach(element => {
+                        console.log(element)
+                        i++;
+                        $('.path-results').append(
+                            `<div class="col-12 m-2">
+                                <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseExample${i}" role="button" aria-expanded="false" aria-controls="collapseExample">path ${i} - ${element.length} stops</a>
+                                    <div class="collapse" id="collapseExample${i}">
+                                    <div class="card card-body">zahur</div>
+                                </div>
+                            </div>`)
+                    });
                 })
                 .catch((error) => {
                         console.log(error)

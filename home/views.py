@@ -280,4 +280,6 @@ def compute_paths(request):
     except:
         result = None
 
+    print(result)
+
     return JsonResponse({'path': result})
