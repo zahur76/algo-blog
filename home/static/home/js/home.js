@@ -1,5 +1,22 @@
 $(document).ready(function(){
 
+
+    // function to iterate through stations
+    
+    function stops(stops) {
+
+        let stations = '';
+        console.log(stops)
+
+        stops.forEach(element => {
+            console.log(element)
+            stations += `<div class="stops col-12">${Object.keys(element)}</div>`
+               
+        });
+
+       return stations
+    }
+
     $('.submit-stations').click(function(e){
         e.preventDefault();
 
@@ -46,9 +63,9 @@ $(document).ready(function(){
                         i++;
                         $('.path-results').append(
                             `<div class="col-12 m-2">
-                                <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseExample${i}" role="button" aria-expanded="false" aria-controls="collapseExample">path ${i} - ${element.length} stops</a>
+                                <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseExample${i}" role="button" aria-expanded="false" aria-controls="collapseExample">path ${i} - ${element.length-1} stops</a>
                                     <div class="collapse" id="collapseExample${i}">
-                                    <div class="card card-body">zahur</div>
+                                    <div class="card card-body">${stops(element)}</div>
                                 </div>
                             </div>`)
                     });
