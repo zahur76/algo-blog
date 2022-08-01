@@ -191,7 +191,7 @@ def send_comment(request):
         comment = request.POST['comment']
 
         subject = "Comment Received from SimpleAlgo"
-        body = comment
+        body = f'Message from {username}\n{email}\n{comment}'
 
         send_mail(
             subject,
@@ -234,6 +234,8 @@ def part_two(request):
 
 @require_http_methods(["POST"])
 def compute_paths(request):
+
+    all_routes = []
 
     data = json.loads(request.body)
 
@@ -278,7 +280,5 @@ def compute_paths(request):
         result = find_routes(graph, data['departure'], data['arrival'])
     except:
         result = None
-
-    print(result)
 
     return JsonResponse({'path': result})

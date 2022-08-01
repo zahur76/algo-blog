@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="hero">
+    <div class="hero-one">
         <div class="title text-light text-two h1">Finding Node Network Routes: Part One</div>
         <div class="overlay"></div>
     </div>
@@ -14,7 +14,7 @@
         <a class="text-decoration-none text-light logo" href="{% url 'home' %}">SimpleAlgo <i class="fas fa-code-branch"></i></a>
     </header>    
     
-    <div class="text-secondary fst-italic p-2">By Zahur Meerun July 2022</div>
+    <div class="text-secondary fst-italic p-2">By Zahur Meerun July 2022. Updated August 2022</div>
     <section class="p-1 mt-0 text-two">
         <div class="col-12 h2 text-primary text-center">Content</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">Part 1: <a class="text-decoration-none" href="{% url 'home' %}">Laying down the basics</a></br>
@@ -27,9 +27,9 @@
             
             We will break down the coding process into small parts which can easily be digested so as to understand the core concepts involved. For coding we will use python.
         </div>
-        <div class="col-12 h2 text-primary text-center mt-5">How Data is stored</div>
+        <div class="col-12 h2 text-primary text-center mt-5">How Can Data is stored</div>
         <div class="article ps-5 pe-5 w-75 mx-auto">
-            Data needs to be stored! But how? A tree data structure! Just like a tree is made of a root connected to branches and leaves a tree data structure has nodes with key pair values. 
+            Data needs to be stored! But how? A tree data structure would be a perfect fit. Just like a tree is made of a root connected to branches and leaves a tree data structure has nodes with key pair values. 
             Each node represents a location having a unique name (key) and a value. The value can be a list, string, or even a dictionary. Each node can be connected to a node or even a series of nodes with links (edges) just like a tree branch is 
             connected to leaves.</br></br>
             <div class="text-center tree"><img src="{{ MEDIA_URL }}tree-1.png" alt="data tree structure" /></div>

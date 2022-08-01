@@ -1,17 +1,28 @@
 $(document).ready(function(){
 
+    $('.reset-stations').hide();
+
+    $('.reset-stations').click(function(){
+        $("#arrival select").val('Destination Station');
+        $("#departure select").val('Departure Station');
+
+        $('.submit-stations').show();
+        $('.reset-stations').hide();
+
+        $('.path-results').html('');
+    })
 
     function stationColour(station){
         if(station[0][0]==['Northern Line']){
-            return `<span class="text-dark">${station[0][0]}</span>`
+            return `<span class="border-start border-5 border-dark text-dark ps-2">${station[0][0]}</span>`
         }else if(station[0][0]==['Victoria Line']){
-            return `<span class="text-info">${station[0][0]}</span>`
+            return `<span class="border-start border-5 border-info text-info ps-2">${station[0][0]}</span>`
         }else if(station[0][0]==['Central Line']){
-            return `<span class="text-danger">${station[0][0]}</span>`
+            return `<span class="border-start border-5 border-danger text-danger ps-2">${station[0][0]}</span>`
         }else if(station[0][0]==['Bakerloo Line']){
-            return `<span class="text-brown">${station[0][0]}</span>`
+            return `<span class="border-brown text-brown ps-2">${station[0][0]}</span>`
         }else{
-            return `<span class="text-warning">${station[0][0]}</span>`
+            return `<span class="border-start border-5 border-warning text-warning ps-2">${station[0][0]}</span>`
         }        
     }
 
@@ -30,8 +41,17 @@ $(document).ready(function(){
                     }
                 }
             }
-            let station = stationColour([stationList[0]])
-            return stationList[0]
+            if(stationList[0]=='Northern Line'){
+                return `<span class="border-start border-5 border-dark text-dark ps-2">${stationList[0]}</span>`
+            }else if(stationList[0]=='Victoria Line'){
+                return `<span class="border-start border-5 border-info text-info ps-2">${stationList[0]}</span>`
+            }else if(stationList[0]=='Central Line'){
+                return `<span class="border-start border-5 border-danger text-danger ps-2">${stationList[0]}</span>`
+            }else if(stationList[0]=='Bakerloo Line'){
+                return `<span class="border-brown text-brown ps-2">${stationList[0]}</span>`
+            }else{
+                return `<span class="border-start border-5 border-warning text-warning ps-2">${stationList[0]}</span>`
+            }
 
         }else{
             return 'Destination!'
@@ -47,9 +67,9 @@ $(document).ready(function(){
         stops.forEach(element => {
             count += 1
             if(Object.values(element)[0].length > 1 ){
-                stations += `<div class="stops col-12 text-center"><span class="border border-dark p-2">${Object.keys(element)}</span><div class="col-12 fw-bold stations p-3">${transit(stops, count)}</div>`                
+                stations += `<div class="stops col-12 text-center"><span class="border border-dark rounded-2 bg-secondary text-light p-2">${Object.keys(element)} <i class="fas fa-subway"></i></span><div class="col-12 fw-bold stations p-3">${transit(stops, count)}</div>`                
             }else{
-                stations += `<div class="stops col-12 text-center"><span class="border border-dark p-2">${Object.keys(element)}</span><div class="col-12 fw-bold stations p-3">${stationColour(Object.values(element))}</div>` 
+                stations += `<div class="stops col-12 text-center"><span class="border border-dark rounded-2 bg-secondary text-light p-2">${Object.keys(element)} <i class="fas fa-subway"></i></span><div class="col-12 fw-bold stations p-3">${stationColour(Object.values(element))}</div>` 
             }           
         })
         return stations
@@ -82,6 +102,13 @@ $(document).ready(function(){
                 $('#arrival').css('border', '1px solid #ced4da');
                 $('#departure').css('border', '1px solid #ced4da');
             }, 1500);
+        }else if(departure==arrival){
+            $('#arrival').css('border', '2px solid red');
+            $('#departure').css('border', '2px solid red');
+            setInterval(() => {
+                $('#arrival').css('border', '1px solid #ced4da');
+                $('#departure').css('border', '1px solid #ced4da');
+            }, 1500);
         }else{
             console.log('ok')
             data = {'departure': departure, 'arrival': arrival}
@@ -94,10 +121,10 @@ $(document).ready(function(){
                 throw new Error('Something went wrong');
                 })
                 .then((responseJson) => {
-                    console.log(responseJson)
+                    $('.submit-stations').hide();
+                    $('.reset-stations').show();
                     let i=0;
                     responseJson['path'].forEach(element => {
-                        console.log(element)
                         i++;
                         $('.path-results').append(
                             `<div class="col-12 m-2">
