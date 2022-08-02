@@ -128,7 +128,7 @@ $(document).ready(function(){
                         i++;
                         $('.path-results').append(
                             `<div class="col-12 m-2">
-                                <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseExample${i}" role="button" aria-expanded="false" aria-controls="collapseExample">path ${i} - ${element.length-1} stops</a>
+                                <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseExample${i}" role="button" aria-expanded="false" aria-controls="collapseExample">path ${i} - ${element.length-1} stops <i class="ps-1 pb-1 my-auto fas fa-sort-down"></i></a>
                                     <div class="collapse" id="collapseExample${i}">
                                     <div class="card card-body border-0">${stops(element)}</div>
                                 </div>

@@ -28,7 +28,7 @@
         <div class="col-12 h2 text-primary text-center">The London Underground <i class="fas fa-subway"></i></div>
         <div class="article ps-5 pe-5 w-75 mx-auto">The London Underground would be a perfect example to test our search algorithm by obtaining all paths between 2 points,
             i.e our departure and destination.</br></br>
-            The Tube is made up of 11 lines, but to simplify things we will only be interested in 5:
+            The Tube network is made up of 11 lines, however we will only be interested in 5 lines:
             <ul>
                 <li class="text-danger fw-bold">Central Line</li>
                 <li class="text-dark fw-bold">Northern Line</li>
@@ -39,7 +39,7 @@
             Below is the London Underground Map so you can familiarise yourself with the layout. As you can see, the 5 tube lines cover a vast majority
             of the network.
         </br></br>
-            <div class="text-center mb-5"><embed src="https://content.tfl.gov.uk/standard-tube-map.pdf" width="90%" height="500px" type="application/pdf"></div>
+            <div class="text-center mb-5 underground-map mx-auto border border-3 border-secondary"><img src="{{ MEDIA_URL }}map.png" alt="underground-map"/></div>
         </div>
         <div class="col-12 h2 text-primary text-center"> Our Graph</div>
         <div class="article ps-5 pe-5 w-75 mx-auto mb-5">
@@ -52,13 +52,13 @@
                     graph = {"Station name": {"Tube name": [list of tubes arriving at this station],</br>&emsp;&emsp;&emsp;&emsp;&emsp;"Connections": [list of all connecting stations]}}
                 </div>           
             </div>
-            I have put togther the required graph using our 5 chosen line and linked it<a class="text-decoration-none" href="https://github.com/zahur76/algo-blog/blob/master/docs/underground.py" target="_blank"> here.</a>
+            I have assembled the required graph using our 5 chosen lines and linked it<a class="text-decoration-none" href="https://github.com/zahur76/algo-blog/blob/master/docs/underground.py" target="_blank"> here.</a>
         </div>
         <div class="col-12 h2 text-primary text-center"> Code Recap And Update</div>
         <div class="article ps-5 pe-5 w-75 mx-auto mb-3">
             We will be using our algorithm derived in part 1 which returned the shortest path available between 2 nodes. We will
             modify this algorithm to return the 3 shortest paths available.</br></br>
-            The steps will be the same as previously described with only a few modifictions to our code. If you wish to have a recap of the code functionality please go back to <a class="text-decoration-none" href="{% url 'home' %}">Part 1</a>.</br></br>
+            The steps will be the same as previously described with only a few modifictions to our code. If you wish to have a recap of the code functionality please review <a class="text-decoration-none" href="{% url 'home' %}">Part 1</a>.</br></br>
             Since we have modified our graph to accomodate all tubes lines arriving at our station we will have to update our recursive code to cater for this.
 
             <div class="d-flex justify-content-center mb-4 mt-3">
@@ -68,7 +68,7 @@
                     &emsp;&emsp;for node in graph[vertex]<span class="text-warning">['Connections']</span>:</br>
                     &emsp;&emsp;&emsp;&emsp;if node not in visited:</br>
                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;queue.append(visited + [node])</br>
-                    &emsp;&emsp;if stack:</br></br>
+                    &emsp;&emsp;if queue:</br></br>
                     &emsp;&emsp;&emsp;&emsp;for route in queue:</br>
                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;find_connections(graph, route[-1], route)</br>
                     &emsp;&emsp;else:</br></br>
@@ -92,7 +92,7 @@
                         &emsp;&emsp;<span class="text-warning">station_path = []</span></br>
                         &emsp;&emsp;<span class="text-warning">for path in my_paths:</span></br>
                         &emsp;&emsp;&emsp;&emsp;<span class="text-warning">new_list = [{station: graph[station]["Line"]} for station in path]</span></br>
-                        &emsp;&emsp;&emsp;&emsp;<span class="text-warning">new_list = station_path.append(new_list)</span></br>
+                        &emsp;&emsp;&emsp;&emsp;<span class="text-warning">station_path.append(new_list)</span></br>
                         &emsp;&emsp;return station_path[:3]</br>
                     </div>
                 </div></br>
@@ -107,12 +107,12 @@
                 </div>
             </div></br>
             If we were to analyse all the returned paths we can see that the routes returned is as expected. We can even see when a change in tube line occured by following our dictionary! The information 
-            returned is useful from a data point of view, however it is not easily visualised. What if we could transform our algorithm into something more presentable. 
+            returned is useful from a data point of view, however it is not easy to visualize. What if we could transform our algorithm into something more presentable?
         </div>
-        <div class="col-12 h2 text-primary text-center mt-5">Underground Application</div>
+        <div class="col-12 h2 text-primary text-center mt-5">Underground Route Application</div>
         <div class="article ps-5 pe-5 w-75 mx-auto mb-3">
             Similar to the map sandbox, we will now implement an application allowing us to display our output in a more user-friendly manner. We will make use of forms to input any 2 stations for departure 
-            and destination and execute our algorithm in the backend producing a visual representation of our planned route.
+            and destination and execute our algorithm in the backend producing a list similar to the output above. We can then iterate and transform our data into a visual representation of our planned route.
 
             <form action="#" method="POST" class="station-path mb-3 text-center">
                 <input type="hidden" id="token" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
@@ -137,9 +137,11 @@
             <div class="col-12 h2 text-primary text-center"> Conclusion</div>
             <div class="article ps-5 pe-5 w-75 mx-auto mb-4">
                 Even though our algorithm returns the path with the least stops, this may not always translate into the minimum time 
-                between 2 stations. For example, if we were to analyze our code output above we would see that we change lines to 
-                rejoin the same line after 1 stop! This would not be practical or even time efficient in some cases. I intend to address this issue in Part 3 of this tutorial where we will introduce time factor into our algorithm.</br></br>
-                We have reached the end of this tutorial. I hope you have have enjoyed it as much as I have. Please leave any feedback you might
+                between 2 stations. For example, if we were to use the application with "Morden" as departure and "Tottenham Court Road" 
+                as destination, the least path route (path 1) will require us to change trains twice compared to path 2 which requires no change and has 1 more stop. 
+                Instinctively, we can deduce that path 2 would most probably be the best option to take in terms of convenience and time.
+                I intend to address this issue in Part 3 of this tutorial where we will introduce time factor into our algorithm.</br></br>
+                We have reached the end of this tutorial. I hope you have enjoyed it as much as I have. Please leave any feedback you might
                 have below or request any other tutorials you would like to see.
             </div>
         </div>

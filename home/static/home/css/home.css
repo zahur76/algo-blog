@@ -18,6 +18,12 @@
     z-index: -1;
 }
 
+.underground-map {
+    width: 90%;
+    height: 500px;
+    overflow: auto;
+}
+
 .bg-header {
     position: absolute;
     top: 0px;
@@ -100,4 +106,3 @@ section {
         width: 75% !important;
     }
 } 
-
