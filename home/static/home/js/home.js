@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+
+    let travelledStations = []
+
     $('.reset-stations').hide();
 
     $('.reset-stations').click(function(){
@@ -30,10 +33,13 @@ $(document).ready(function(){
 
     function transit(stops, element){
 
+        previous = travelledStations[travelledStations.length-1]
+
         if(element <= stops.length-1){
             let stationList = [];
             let nextStation = Object.values(stops[element])[0];
             let actualStation = Object.values(stops[element-1])[0];
+
             for(let i=0; i<=nextStation.length; i++){
                 for(let j=0; j<=actualStation.length; j++){
                     if(nextStation[i]==actualStation[j]){
@@ -41,18 +47,38 @@ $(document).ready(function(){
                     }
                 }
             }
-            if(stationList[0]=='Northern Line'){
-                return `<span class="border-start border-5 border-dark text-dark ps-2">${stationList[0]}</span>`
-            }else if(stationList[0]=='Victoria Line'){
-                return `<span class="border-start border-5 border-info text-info ps-2">${stationList[0]}</span>`
-            }else if(stationList[0]=='Central Line'){
-                return `<span class="border-start border-5 border-danger text-danger ps-2">${stationList[0]}</span>`
-            }else if(stationList[0]=='Bakerloo Line'){
-                return `<span class="border-brown text-brown ps-2">${stationList[0]}</span>`
-            }else{
-                return `<span class="border-start border-5 border-warning text-warning ps-2">${stationList[0]}</span>`
+            let exists = false
+            for(let i=0; i<=stationList.length; i++){
+                if(stationList[i]==previous){
+                    exists = true
+                }
             }
+            if(exists){
+                if(previous=='Northern Line'){
+                    return `<span class="border-start border-5 border-dark text-dark ps-2">${previous}</span>`
+                }else if(previous=='Victoria Line'){
+                    return `<span class="border-start border-5 border-info text-info ps-2">${previous}</span>`
+                }else if(previous=='Central Line'){
+                    return `<span class="border-start border-5 border-danger text-danger ps-2">${previous}</span>`
+                }else if(previous=='Bakerloo Line'){
+                    return `<span class="border-brown text-brown ps-2">${previous}</span>`
+                }else{
+                    return `<span class="border-start border-5 border-warning text-warning ps-2">${previous}</span>`
+                }
+            }else{
+                if(stationList[0]=='Northern Line'){
+                    return `<span class="border-start border-5 border-dark text-dark ps-2">${stationList[0]}</span>`
+                }else if(stationList[0]=='Victoria Line'){
+                    return `<span class="border-start border-5 border-info text-info ps-2">${stationList[0]}</span>`
+                }else if(stationList[0]=='Central Line'){
+                    return `<span class="border-start border-5 border-danger text-danger ps-2">${stationList[0]}</span>`
+                }else if(stationList[0]=='Bakerloo Line'){
+                    return `<span class="border-brown text-brown ps-2">${stationList[0]}</span>`
+                }else{
+                    return `<span class="border-start border-5 border-warning text-warning ps-2">${stationList[0]}</span>`
+                }
 
+            }
         }else{
             return 'Destination!'
         }
@@ -64,12 +90,18 @@ $(document).ready(function(){
 
         let stations = ''; 
         let count = 0
+        travelledStations = []
+
         stops.forEach(element => {
             count += 1
+            let trasitSttation = transit(stops, count)
+            if(trasitSttation!="Destination!"){
+                travelledStations.push($(`${trasitSttation} span`).html())
+            }           
             if(Object.values(element)[0].length > 1 ){
-                stations += `<div class="stops col-12 text-center"><span class="border border-dark rounded-2 bg-secondary text-light p-2">${Object.keys(element)} <i class="fas fa-subway"></i></span><div class="col-12 fw-bold stations p-3">${transit(stops, count)}</div>`                
+                stations += `<div class="stops col-12 text-center"><span class="border border-dark rounded-2 bg-secondary text-light p-2">${Object.keys(element)} <i class="fas fa-subway"></i></span><div class="col-12 fw-bold stations station-${count} p-3">${transit(stops, count)}</div>`                
             }else{
-                stations += `<div class="stops col-12 text-center"><span class="border border-dark rounded-2 bg-secondary text-light p-2">${Object.keys(element)} <i class="fas fa-subway"></i></span><div class="col-12 fw-bold stations p-3">${stationColour(Object.values(element))}</div>` 
+                stations += `<div class="stops col-12 text-center"><span class="border border-dark rounded-2 bg-secondary text-light p-2">${Object.keys(element)} <i class="fas fa-subway"></i></span><div class="col-12 fw-bold stations station-${count} p-3">${stationColour(Object.values(element))}</div>` 
             }           
         })
         return stations
