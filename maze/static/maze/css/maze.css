@@ -10,6 +10,26 @@
     line-height: 30px;
 }
 
+.custom-border {
+    width: 60%;
+    margin-left: 20% !important;
+}
+
+
+@media screen and (max-width: 1200px){
+    .custom-border {
+        width: 70%;
+        margin-left: 15% !important;
+    }   
+}
+
+@media screen and (max-width: 992px){
+    .custom-border {
+        width: 90%;
+        margin-left: 5% !important;
+    }   
+}
+
 
 @media screen and (max-width: 768px){
     .box {
